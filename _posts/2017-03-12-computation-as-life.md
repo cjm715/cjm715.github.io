@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Living computation"
+title: "Part 2: Computation as life"
 date: 2017-03-12
 ---
 
