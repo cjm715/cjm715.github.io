@@ -14,4 +14,4 @@ This was an experiment in collaborative research. During my time as organizer of
 
 * [CSCS news article](https://lsa.umich.edu/cscs/news-events/all-news/search-news/first-ever-um-complex-systems-science-hackathon.html)
 
-* [Information about SFI's similar event that inspired us.](https://www.santafe.edu/news-center/news/72-hours-science-announce)
+* [Article about SFI's similar event that inspired us.](https://www.santafe.edu/news-center/news/72-hours-science-announce)
