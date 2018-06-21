@@ -4,6 +4,11 @@ title: "Reinforcement learning approach to Santa Fe Institute's complexity chall
 date: 2017-11-11
 ---
 
+## White Paper:
+[https://github.com/cjm715/sficc/blob/master/SFICC.pdf](https://github.com/cjm715/sficc/blob/master/SFICC.pdf)
+
+## Code:
+[https://github.com/cjm715/sficc](https://github.com/cjm715/sficc)
 
 
 ## Challenge Question:
@@ -20,10 +25,3 @@ The challenge is to explore the system above and determine a strategy for the ch
 ## Summary of approach
 
 The problem posed to the individual checker is the following: "Given the current state $s$ (dependent on the local neighborhood information, current position, destination), what is the best choice of action $a$ (staying put or moving up, right, down or left)?" This decision can be viewed as trying to determine a policy $\pi (s,a)$ which is the probability of choosing action $a$ given state $s$. Furthermore, we would ideally like to find the optimal policy denoted $ \pi^{\*}(s,a)$ or at least a suboptimal policy that is 'close'. This search problem is the topic of the research area known as reinforcement learning (also known as approximate dynamic programming). This approach is used to find a policy during a learning or training phase. This found policy at the end of the training phase is then tested in a testing phase to evaluate its performance.
-
-## Write-up
-[https://github.com/cjm715/sficc/blob/master/SFICC.pdf](https://github.com/cjm715/sficc/blob/master/SFICC.pdf)
-
-
-## Code
-[https://github.com/cjm715/sficc](https://github.com/cjm715/sficc)
