@@ -15,6 +15,6 @@ My primary PhD thesis work is on optimal fluid mixing in collaboration with my a
 <p>
 [1] C. J. Miles, C. R. Doering, A shell model for optimal mixing, <a href="https://link.springer.com/article/10.1007/s00332-017-9400-7">Journal of Nonlinear Science (2017)</a>
 <p>
-[2] C. J. Miles, C. R. Doering, Diffusion-limited mixing by incompressible flows (submitted) <a href="https://arxiv.org/abs/1712.07187"> 	arXiv:1712.07187 [physics.flu-dyn] </a>
+[2] C. J. Miles, C. R. Doering, Diffusion-limited mixing by incompressible flows  <a href="http://iopscience.iop.org/article/10.1088/1361-6544/aab1c8/meta"> Nonlinearity 31, 5 (2018)</a>
 </p>
 </p>
