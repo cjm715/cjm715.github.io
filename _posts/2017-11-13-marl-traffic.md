@@ -2,6 +2,7 @@
 layout: post
 title: "Multi-agent reinforcement learning of autonomous traffic"
 date: 2018-06-23
+comments: true
 ---
 
 
