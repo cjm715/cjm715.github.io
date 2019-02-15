@@ -1,127 +1,88 @@
 ---
-layout: default
-title: Chris Miles
+layout: page
+title : Shikher Verma
+header-img: "img/home-bg.jpg"
+description: "Programmer Wannabe"
 ---
 
-	<!-- <p>
-		Hi, I'm a computational physics and applied mathematician interested in reinforcement learning, optimal control, multi-agent systems, fluid mechanics, and active matter.
-	</p>
-	<div id= 'profile-photo'>
-	<img src="/profile_photo.jpg" alt="Christopher J. Miles" width="200" >
-	</div> -->
-
-	<div class="post-container">
-	    <div class="post-thumb">
-			<img src="/images/profile_photo_transparent.gif" alt="Christopher J. Miles" width="150" >
-		</div>
-	    <div class="post-content">
-
-			<p> <font color='white'> <i>Data Scientist and Physicist</i></font></p>
-			<br>
-			<p> <font color='white'>
-				Hi, I am interested in  reinforcement learning, data science, and nonlinear dynamics. See projects below on these topics.</font></p>
-	   </div>
+<!-- About Content -->
+<section id="about">
+	<div>
+		<p>
+			Here is the part where I am supposed to describe myself !
+			After 2 hours of intense staring competition with my laptop, this is what I came up with.
+		</p>
+		<p>
+			Hi, I am a physics major who believes in the philosophy of open source and will be happy to collaborate with you on any interesting project. When not staring at some code you could find me in the chess club solving chess puzzles or at the basketball field shooting 3 pointers :)
+		</p>
 	</div>
-<!--
-Hi! I'm a computational physics and applied mathematician interested in reinforcement learning, optimal control, multi-agent systems, fluid mechanics, and active matter. -->
+</section>
 
+<!-- Portfolio Grid Section -->
+<section id="portfolio">
+	<div class="row">
+		<div class="text-center">
+			<h2>Here's the stuff I've yet to disavow.</h2>
+			<hr>
+		</div>
+	</div>
 
-<div class="ph-section">
-	<a name="projects"></a>
-
-	<h1> Projects </h1>
-
-	<div class = "ph-container">
-		<div class="ph-thumb">
-			<a href = "/personal_projects/sficc">
-			<img src="/images/marl.jpg" width="150">
+	<div class="row">
+		{% for item in site.portfolio %}
+		<div class="col-sm-4 portfolio-item">
+			<a href="#{{ item.anchor }}" class="portfolio-link" data-keyboard="true" data-toggle="modal">
+				<div class="caption" >
+					<div class="caption-content" >
+						{{ item.title }}<p></p>
+						<i class="fa fa-search-plus"></i><p></p>
+						Category: {{ item.category }}
+					</div>
+				</div>
+				<img src="{{ item.image }}" class="img-responsive" alt="">
 			</a>
 		</div>
-		<div class="ph-content">
-			<h2>
-				Multi-agent reinforcement learning of autonomous traffic
-			</h2>
-			<p> Suppose you had a collection of self-driving cars where each car operates under its own local rule or policy. What is the best individual policy (or heterogenous collection of individual policies) to optimize traffic (everyone gets to their destination in a reasonable time while avoiding traffic congestion)? This project explores this question by applying Q-learning to a multi-agent gridworld system mimicking self-driving car traffic where many agents are attempting to move across a grid to their individually prescribed destination while avoiding collision.  </p>
-			<ul>
-				<li><a href = "/blog/2018/06/23/marl-traffic"> Blog post</a></li>
-				<li><a href = "https://github.com/cjm715/sficc/blob/master/SFICC.pdf">White Paper </a></li>
-				<li><a href = "https://github.com/cjm715/sficc"> Code Repository</a></li>
-			</ul>
+		{% endfor %}
+	</section>
+
+	<!-- Portfolio Modals -->
+	<section id="portfolio modals">
+		{% for item in site.portfolio %}
+		<div class="portfolio-modal modal fade" id="{{ item.anchor }}" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-content">
+				<div class="close-modal" data-dismiss="modal">
+					<div class="lr">
+						<div class="rl">
+						</div>
+					</div>
+				</div>
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-8 col-lg-offset-2">
+							<div class="modal-body">
+								<h2>{{ item.title }}</h2>
+								<hr class="star-primary">
+								<img src="{{ item.image }}" class="img-responsive img-centered" alt="">
+								<p>{{ item.description }}</p>
+								<ul class="list-inline item-details">
+									<li>Team:
+										<strong>{{ item.team }}
+										</strong>
+									</li>
+									<li>Date:
+										<strong>{{ item.date | date: '%B %Y' }}
+										</strong>
+									</li>
+									<li>Category:
+										<strong>{{ item.category }}
+										</strong>
+									</li>
+								</ul>
+								<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-	</div>
-
-
-	<div class = "ph-container">
-		<div class="ph-thumb">
-			<a href = "/personal_projects/optimalmixing">
-			<img src="/images/mixing.gif" width="150" loop=infinite >
-			</a>
-		</div>
-		<div class="ph-content">
-			<h2>Optimal control of fluid mixing</h2>
-			<p> What is the best way to mix two fluids? Say --- cream and coffee?
-			We explore this question by using concepts from numerical optimization,
-			optimal control theory, and functional analysis.</p>
-			<ul>
-				<li><a href = "/personal_projects/optimalmixing"> Online article </a></li>
-				<li><a href="https://link.springer.com/article/10.1007/s00332-017-9400-7">
-					C. J. Miles, C. R. Doering, A shell model for optimal mixing, Journal of Nonlinear Science (2017)</a></li>
-				<li><a href="http://iopscience.iop.org/article/10.1088/1361-6544/aab1c8/meta">
-					C. J. Miles, C. R. Doering, Diffusion-limited mixing by incompressible flows, Nonlinearity 31, 5 (2018)</a></li>
-			</ul>
-		</div>
-	</div>
-
-	<div class = "ph-container">
-		<div class="ph-thumb">
-			<a href = "https://ulisrael.github.io/csblog/">
-			<img src="/images/boids.gif" width="150" loop=infinite >
-			</a>
-		</div>
-		<div class="ph-content">
-
-			<h2>What is a complex system? </h2>
-			<p> The linked article below is an interactive educational piece on complex systems. It
-				attempts to explain complex systems science by exploring two classic
-				bird flocking models. </p>
-			<ul>
-				<li><a href = "https://ulisrael.github.io/csblog/"> Online article </a></li>
-			</ul>
-
-		</div>
-	</div>
-
-	<div class = "ph-container">
-		<div class="ph-thumb">
-			<a href = "https://arxiv.org/abs/1803.05543">
-				<img src="/images/activematter.gif" width="150" loop=infinite >
-			</a>
-		</div>
-		<div class="ph-content">
-			<h2>Collective motion of many active particles</h2>
-			<p> Swimming bacteria rarely exist in isolation. Rather, they are commonly found in groups
-				where bacteria can interact with each other. When the main form of interaction is mediated through the fluid flow between them, interesting rich global patterns can emerge as a result.
-				We adopt the modeling perspective that the collection of bacteria operates as a collection of active self-propelling particles. We formulate this perspective by using
-				concepts from fluid dynamics and kinetic theory to study the collective dynamics
-				of various initial particle distributions.
-				<!-- We use a hydrodynamic-kinetic-theory
-				model to explore these dynamics. We focus on the effects of various geometries
-				of the initially confined particle colony. -->
-			</p>
-			<ul>
-				<!-- <li><a href = "/personal_projects/activematter"> Blog post </a></li> -->
-				<li><a href="https://arxiv.org/abs/1803.05543">C. J. Miles, Arthur A. Evans, Michael J. Shelley, and Saverio E. Spagnolie, Active matter invasion of a viscous fluid and a no-flow theorem, arXiv:1803.05543[cond-mat.soft]</a></li>
-			</ul>
-
-
-			<p><a href = ""> </a></p>
-		</div>
-	</div>
-	<p>
-	See older projects, here:
-	<ul>
-		<li><p>Acoustic droplet vaporization (<a href = "/personal_projects/adv">summary</a>, <a href = "https://aip.scitation.org/doi/10.1063/1.4958907"> paper</a>)</p></li>
-		<li><p> <a href = "/personal_projects/hackathon"> Complex systems hackathon </a></p></li>
-	</ul>
-	</p>
-</div>
+		{% endfor %}
+	</section>
