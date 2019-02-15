@@ -1,4 +1,4 @@
 name: Chris Miles
 markdown: kramdown
 permalink: /blog/:year/:month/:day/:title
-port: 8888
+port: 8080
