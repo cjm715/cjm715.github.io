@@ -94,7 +94,7 @@ let sketch = function(p) {
         data_y = []
         for (i = 0; i < N; i++) {
             data_x.push(i / N)
-            data_y.push(i / N + p.random(-0.2, 0.2))
+            data_y.push(0.4 / N * i + 0.3 + p.random(-0.2, 0.2))
         }
     }
 
@@ -160,7 +160,7 @@ let sketch = function(p) {
         let y_1 = linear_model(x_1, w0, w1)
         spt_1 = pt2screen(x_1, y_1)
 
-        let x_2 = N
+        let x_2 = 1
         let y_2 = linear_model(x_2, w0, w1)
 
         spt_2 = pt2screen(x_2, y_2)

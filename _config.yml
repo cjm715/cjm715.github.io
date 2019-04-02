@@ -34,7 +34,7 @@ wpm: 150
 markdown: kramdown
 highlighter: rouge
 exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
-port: 8888
+port: 4000
 permalink: /blog/:title
 
 # jekyll-paginate. for paginating blog posts.
