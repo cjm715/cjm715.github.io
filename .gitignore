@@ -1,4 +1,3 @@
 _site/
-.envrc
-.direnv
 Gemfile*
+.jekyll-cache
