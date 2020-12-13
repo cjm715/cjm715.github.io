@@ -14,16 +14,16 @@ minima:
 
   # generate social links in footer
   social_links:
-    #twitter:
+    twitter: cjmiles715
     github:  cjm715
     scholar:  nLpWYR8AAAAJ
+    linkedin: chris-john-miles
+    kaggle: cmiles715
     # devto: jekyll
     # dribbble: jekyll
     # facebook: jekyll
     # flickr:   jekyll
     # instagram: jekyll
-    linkedin: chris-john-miles
-    kaggle: cmiles715
     # pinterest: jekyll
     # youtube: jekyll
     # youtube_channel: UC8CXR0-3I70i1tfPg1PAE1g
