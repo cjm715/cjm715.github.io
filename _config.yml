@@ -3,7 +3,7 @@ author:
   name: Chris Miles
   email: chris.john.miles@gmail.com
 description: > # this means to ignore newlines until "show_excerpts:"
-  Hi, this is a blog site on machine learning and software engineering. 
+  Hi, this is a blog site on machine learning and software engineering.
 
 show_excerpts: false # set to true to show excerpts on the homepage
 
@@ -23,6 +23,7 @@ minima:
     # flickr:   jekyll
     # instagram: jekyll
     linkedin: chris-john-miles
+    kaggle: cmiles715
     # pinterest: jekyll
     # youtube: jekyll
     # youtube_channel: UC8CXR0-3I70i1tfPg1PAE1g

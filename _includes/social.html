@@ -19,4 +19,5 @@
   {%- if social.microdotblog -%}<li><a rel="me" href="https://micro.blog/{{ social.microdotblog | cgi_escape | escape }}" title="{{ social.microdotblog | escape }}"><svg class="svg-icon grey"><use xlink:href="{{ '/assets/minima-social-icons.svg#microdotblog' | relative_url }}"></use></svg></a></li>{%- endif -%}
   {%- if social.devto -%}<li><a href="https://dev.to/{{ social.devto | cgi_escape | escape }}" title="{{ social.devto | escape }}"><svg class="svg-icon grey"><use xlink:href="{{ '/assets/minima-social-icons.svg#devto' | relative_url }}"></use></svg></a></li>{%- endif -%}
   {%- if social.scholar -%}<li><a rel="me" href="https://scholar.google.com/citations?user={{ social.scholar | cgi_escape | escape }}" title="Google Scholar"><svg class="svg-icon grey"><use xlink:href="{{ '/assets/minima-social-icons.svg#scholar' | relative_url }}"></use></svg></a></li>{%- endif -%}
+  {%- if social.kaggle -%}<li><a rel="me" href="https://www.kaggle.com/{{ social.kaggle | cgi_escape | escape }}" title="Kaggle"><svg class="svg-icon grey"><use xlink:href="{{ '/assets/minima-social-icons.svg#kaggle' | relative_url }}"></use></svg></a></li>{%- endif -%}
 </ul>
