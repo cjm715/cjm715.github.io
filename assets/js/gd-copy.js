@@ -1,25 +1,24 @@
 let sketch = function(p) {
-    let w;
-    let columns;
-    let rows;
     let board;
     let next;
-    let height = 250;
-    let width = 250;
+    let w = 20;
+    let rows = 20;
+    let columns = 35;
 
     p.setup = function() {
-      p.frameRate(10);
+      p.frameRate(15);
 
-      p.createCanvas(width, height);
-      w = 10;
-      // Calculate columns and rows
-      columns = p.floor(width / w);
-      rows = p.floor(height / w);
-      // Wacky way to make a 2D array is JS
+      console.log(w*rows)
+      console.log(w*columns)
+      p.createCanvas(w*columns, w*rows);
+
+      // Wacky way to make a 2D array in JS
       board = new Array(columns);
       for (let i = 0; i < columns; i++) {
         board[i] = new Array(rows);
       }
+      // console.log(board)
+
       // Going to use multiple 2D arrays and swap them
       next = new Array(columns);
       for (i = 0; i < columns; i++) {
@@ -29,16 +28,36 @@ let sketch = function(p) {
     }
 
     p.draw = function() {
-      p.background(255);
+        // console.log(columns)
+        // console.log(rows)
+
+      //c1 = p.color('#195190FF'); // dark
+      //c2 = p.color('#A2A2A1FF'); // light
+
+      // c1 = p.color('#EC4D37'); // alive
+      // c2 = p.color('#1D1B1B'); // dead
+      // c3 = p.color('#000000'); // border
+
+      // c1 = p.color('#EC8B5E'); // alive
+      // c2 = p.color('#141A46'); // dead
+      // c3 = p.color('#000000'); // border
+      //
+      c1 = p.color('#F4A950'); // alive
+      c2 = p.color('#161B21'); // dead
+      c3 = p.color('#000000'); // border
+
+      p.background(c2);
       p.generate();
       for ( let i = 0; i < columns;i++) {
         for ( let j = 0; j < rows;j++) {
-          if ((board[i][j] == 1)) p.fill(0);
-          else p.fill(255);
-          p.stroke(150);
+          if ((board[i][j] == 1)) p.fill(c1);
+          else p.fill(c2);
+          p.stroke(c3);
           p.rect(i * w, j * w, w-1, w-1);
+          // console.log(j)
         }
       }
+
 
     }
 
