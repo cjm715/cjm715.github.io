@@ -23,8 +23,7 @@ let sketch = function(p) {
       for (let i = 0; i < columns; i++) {
         board[i] = new Array(rows);
       }
-      // console.log(board)
-
+      
       // Going to use multiple 2D arrays and swap them
       next = new Array(columns);
       for (i = 0; i < columns; i++) {
@@ -34,26 +33,6 @@ let sketch = function(p) {
     }
 
     p.draw = function() {
-        // console.log(columns)
-        // console.log(rows)
-
-
-      //c1 = p.color('#195190FF'); // dark
-      //c2 = p.color('#A2A2A1FF'); // light
-
-      // c1 = p.color('#EC4D37'); // alive
-      // c2 = p.color('#1D1B1B'); // dead
-      // c3 = p.color('#000000'); // border
-
-      // c1 = p.color('#EC8B5E'); // alive
-      // c2 = p.color('#141A46'); // dead
-      // c3 = p.color('#000000'); // border
-      //
-      // c1 = p.color('#F4A950'); // alive
-      // c2 = p.color('#161B21'); // dead
-      // c3 = p.color('#000000'); // border
-
-      //c1 = p.color('#1cc9e3'); // alive
       c1 = p.color('#3e9bf4');
       c2 = p.color('#161B21'); // dead
       c3 = p.color('#000000'); // border
