@@ -79,6 +79,10 @@ let sketch = function(p) {
       p.init();
     }
 
+    p.windowResized = function() {
+      p.setup();
+    }
+
     // Fill board randomly
     p.init = function() {
       for (let i = 0; i < columns; i++) {

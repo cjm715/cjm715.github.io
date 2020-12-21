@@ -82,7 +82,7 @@
   }
 
   .page-link {
-    color: $text-color;
+    color: $link-base-color;
     line-height: $base-line-height;
     display: block;
     padding: 5px 10px;
@@ -261,6 +261,7 @@
 }
 
 .post-content {
+  // background: $content-background-color;
   margin-bottom: $spacing-unit;
 
   h1, h2, h3 { margin-top: $spacing-unit * 2 }
