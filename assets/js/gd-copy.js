@@ -2,15 +2,21 @@ let sketch = function(p) {
     let board;
     let next;
     let w = 20;
-    let rows = 20;
-    let columns = 35;
+    let rows;
+    let columns;
 
     p.setup = function() {
       p.frameRate(8);
 
-      console.log(w*rows)
-      console.log(w*columns)
-      p.createCanvas(w*columns, w*rows);
+      window_width = p.floor(0.95*document.body.clientWidth / w) * w
+
+      width = p.min(740, window_width)
+      height = 400
+
+      columns = p.floor(width / w)
+      rows = p.floor(height / w);
+
+      p.createCanvas(width, height);
 
       // Wacky way to make a 2D array in JS
       board = new Array(columns);
@@ -30,6 +36,7 @@ let sketch = function(p) {
     p.draw = function() {
         // console.log(columns)
         // console.log(rows)
+
 
       //c1 = p.color('#195190FF'); // dark
       //c2 = p.color('#A2A2A1FF'); // light
