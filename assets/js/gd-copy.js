@@ -8,7 +8,7 @@ let sketch = function(p) {
     p.setup = function() {
       p.frameRate(8);
 
-      window_width = p.floor(0.95*document.body.clientWidth / w) * w
+      window_width = p.floor(0.9*document.body.clientWidth / w) * w
 
       width = p.min(740, window_width)
       height = 400
