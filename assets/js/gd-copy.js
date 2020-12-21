@@ -42,9 +42,15 @@ let sketch = function(p) {
       // c2 = p.color('#141A46'); // dead
       // c3 = p.color('#000000'); // border
       //
-      c1 = p.color('#F4A950'); // alive
+      // c1 = p.color('#F4A950'); // alive
+      // c2 = p.color('#161B21'); // dead
+      // c3 = p.color('#000000'); // border
+
+      //c1 = p.color('#1cc9e3'); // alive
+      c1 = p.color('#3e9bf4');
       c2 = p.color('#161B21'); // dead
       c3 = p.color('#000000'); // border
+
 
       p.background(c2);
       p.generate();
