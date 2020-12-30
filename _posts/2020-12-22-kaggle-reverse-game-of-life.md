@@ -78,7 +78,9 @@ If your restart the game above (by clicking on the simulation), you will find th
 <!-- END OF SIMULATION -->
 
 ## The competition problem statement
-Given only the final state of the game of life (on a 25x25 grid) and the number of time steps between the final and initial states, determine an initial state that when evolved forward in time according the rules of the game of life closely matches the final state. For instance, suppose the final state given is the pattern below:
+Given only the final state of the game of life (on a 25x25 grid) and the number of time steps between the final and initial states, determine an initial state that when evolved forward in time according the rules of the game of life closely matches the given final state.
+
+For instance, suppose we have the following sequence of grid states appearing in the game of life:
 
 <!-- BEGINNING OF TIMELINE SIMULATION-->
 <script src="{{ base.url | prepend: site.url }}/assets/js/comp-desc.js"></script>
@@ -91,7 +93,7 @@ Given only the final state of the game of life (on a 25x25 grid) and the number 
 <br/>
 <!-- END OF SIMULATION -->
 
-The closeness between this evolved final state and the given final state is given by mean absolute error of the predictions across cells and multiple instances of the game. note that the initial state provided does have to match the true initial state actually used to arrive at the given final state.
+The given state would be the last state or stop state at t=3. The other states are not given in the kaggle dataset. The task is to find an initial state or start state at t=0 that would evolve forward in time to a state that is close to the given stop state. Notice that it does not have to evolve to a state that is exactly the given stop state --- it only needs to be close. The closeness between this evolved stop state and the given stop state is measured by the mean absolute error of the predictions across cells. Also, note that even if we are successful at finding a start state that evolves to the exact stop state, it is possible that this discovered start state does not match the true start state that was used originally. This is due to the fact that multiple states can lead to the same state by the nature of the Game of Life rules.
 
 
 
