@@ -1,2 +1,26 @@
 // Placeholder to allow defining custom styles that override everything else.
 // (Use `_sass/minima/custom-variables.scss` to override variable defaults)
+
+.image_post {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  //width: 50%;
+  border: 5px solid #3e9bf4;
+}
+
+
+.simulation_post {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  //width: 50%;
+}
+
+canvas {
+  display: block;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  border: 5px solid #3e9bf4;
+}

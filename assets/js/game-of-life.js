@@ -4,6 +4,8 @@ let sketch = function(p) {
     let w = 20;
     let rows;
     let columns;
+    let width;
+    let height;
 
     p.setup = function() {
       p.frameRate(8);
@@ -16,14 +18,16 @@ let sketch = function(p) {
       columns = p.floor(width / w)
       rows = p.floor(height / w);
 
-      p.createCanvas(width, height);
+      let cnv = p.createCanvas(width, height);
+      //cnv.position(document.body.clientWidth/2 + width/2)
+      //cnv.position(document.body.clientWidth/2 - width/2);
 
       // Wacky way to make a 2D array in JS
       board = new Array(columns);
       for (let i = 0; i < columns; i++) {
         board[i] = new Array(rows);
       }
-      
+
       // Going to use multiple 2D arrays and swap them
       next = new Array(columns);
       for (i = 0; i < columns; i++) {
@@ -55,7 +59,10 @@ let sketch = function(p) {
 
     // reset board when mouse is pressed
     p.mousePressed = function() {
-      p.init();
+        if (((p.mouseX >= 0) & (p.mouseX <= width)) &
+            ((p.mouseY >= 0) & (p.mouseY <= height))){
+            p.init();
+        }
     }
 
     p.windowResized = function() {
@@ -66,26 +73,35 @@ let sketch = function(p) {
     p.init = function() {
       for (let i = 0; i < columns; i++) {
         for (let j = 0; j < rows; j++) {
-          // Lining the edges with 0s
-          if (i == 0 || j == 0 || i == columns-1 || j == rows-1) board[i][j] = 0;
-          // Filling the rest randomly
-          else board[i][j] = p.floor(p.random(2));
+
+          // Filling randomly
+          board[i][j] = p.floor(p.random(2));
+
           next[i][j] = 0;
         }
       }
+    }
+
+    p.mod = function(x, n) {
+        return ((x % n) + n) % n
     }
 
     // The process of creating the new generation
     p.generate = function() {
 
       // Loop through every spot in our 2D array and check spots neighbors
-      for (let x = 1; x < columns - 1; x++) {
-        for (let y = 1; y < rows - 1; y++) {
+      for (let x = 0; x < columns; x++) {
+        for (let y = 0; y < rows; y++) {
           // Add up all the states in a 3x3 surrounding grid
           let neighbors = 0;
           for (let i = -1; i <= 1; i++) {
             for (let j = -1; j <= 1; j++) {
-              neighbors += board[x+i][y+j];
+              col_id = p.mod((x+i), columns)
+              row_id = p.mod((y+j), rows)
+
+              // console.log(col_id)
+
+              neighbors += board[col_id][row_id];
             }
           }
 
@@ -106,5 +122,6 @@ let sketch = function(p) {
       next = temp;
     }
 };
+
 
 let myp5 = new p5(sketch, 'canvasDiv');

@@ -7,59 +7,98 @@ categories: data
 ---
 
 
+
+
+This article explains my solution to the Kaggle Competition: Reverse Game of Life 2020. We will go over the Game of Life itself, the competition description, and then a walk through of the code for my solution (all code is available on github [here](https://github.com/cjm715/kaggle-game-of-life)).
+
+
+
+
+## What is Conway's game of life?
+
+In 1970, the late British mathematician John Horton Conway, who sadly left us only recently due to complications of COVID-19 in April of 2020, created a cellular automaton called the Game of Life which has inspired many scientists from a variety of discplines such as computer science, complexity science, biology, physics, and others ever since its creation.
+
+
+<!-- BEGINNING OF IMAGE -->
+<a href="https://en.wikipedia.org/wiki/John_Horton_Conway">
+<img src="{{site.url}}/assets/images/John_H_Conway_2005.jpeg"  width="300" class="image_post">
+</a>
+
+<sub>*Mathematician John H. Conway. This image is from the Wikipedia article on ["John Horton Conway"](https://commons.wikimedia.org/wiki/File:John_H_Conway_2005_(cropped).jpg) and authored by [Thane Plambeck](https://www.flickr.com/photos/thane/20366806/) under license [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/deed.en).*</sub>
+
+<br/>
+<!-- END OF IMAGE -->
+
+It consists of applying a set of simple rules to a grid where each cell is either dead or alive. The grid is updated each time step by these set of rules:
+- If a cell is alive and there are exactly 2 or 3 alive neighbors (out of the 8 neighbors in its neighborhood), then the cell remains alive in the next time step.
+- If the cell is dead and there are exactly 3 alive neighbors, then the cell becomes alive in the next time step.
+- For all other cases, the cell is dead in the next time step.
+
+The game of life can be initialized in any grid configuration of alive and dead cells. Typically, the grid is initialized randomly throughout the grid with a probability of a given cell being alive is set to 1/2.
+
+When a cell is at the boundary, the definition of neighborhood is ambiguous. Some implementations of the game of life, use periodic boundary conditions which means that a cell will see the neighbor across the board as its neighbor. Another way to view the periodic condition is by imagining the grid tiled indefinitely throughout space. Then when you consider the 8-cell neighborhood, you will always have a full neighborhood. In this competition, the game of life is implemented with this periodic boundary condition.
+
+The simulation below is the game of life running live within this browser. Blue cells are alive and black cells are dead. Each time step is applying the rules mentioned above.
+
+<!-- BEGINNING OF SIMULATION -->
 <script src="{{ base.url | prepend: site.url }}/assets/js/game-of-life.js"></script>
 
 <div id='canvasDiv'>
+<!--  class='simulation_post'> -->
 </div>
 
 
-<sub>*This simulation is running live in browser! Click anywhere to restart the game of life. This is a modification of the original ["Game of Life"](https://p5js.org/examples/simulate-game-of-life.html) p5.js example by [Daniel Shiffman](https://natureofcode.com/) licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).*</sub>
+<sub>*Click anywhere to restart the game of life. This is a modification of the original ["Game of Life"](https://p5js.org/examples/simulate-game-of-life.html) p5.js example by [Daniel Shiffman](https://natureofcode.com/) licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).*</sub>
+
+<br/>
+<!-- END OF SIMULATION -->
+
+The Game of Life is ridiculously simple to define. Yet as you can see above in the simulation, it produces interesting patterns over time that almost appear life-like --- hence the name: Game of Life.
+
+If your restart the game above (by clicking on the simulation), you will find that at later times you will see some patterns that keep showing up. Some have have been named by the research community such as the Glider and Blinker shown below.
+
+<!-- BEGINNING OF GLIDER SIMULATION -->
+<script src="{{ base.url | prepend: site.url }}/assets/js/glider.js"></script>
+
+<div id='gliderDiv'>
+</div>
+<sub><center><i>Glider</i></center></sub>
+
+<br/>
+<!-- END OF SIMULATION -->
+
+<!-- BEGINNING OF BLINKER SIMULATION -->
+<script src="{{ base.url | prepend: site.url }}/assets/js/blinker.js"></script>
+
+<div id='blinkerDiv'>
+</div>
+<sub><center><i>Blinker</i></center></sub>
+
+<br/>
+<!-- END OF SIMULATION -->
+
+## The competition problem statement
+Given only the final state of the game of life (on a 25x25 grid) and the number of time steps between the final and initial states, determine an initial state that when evolved forward in time according the rules of the game of life closely matches the final state. For instance, suppose the final state given is the pattern below:
+
+<!-- BEGINNING OF GLIDER SIMULATION -->
+<script src="{{ base.url | prepend: site.url }}/assets/js/comp-desc.js"></script>
+
+<div id='compDescDiv'>
+</div>
+
+<br/>
+<!-- END OF SIMULATION -->
+
+The closeness between this evolved final state and the given final state is given by mean absolute error of the predictions across cells and multiple instances of the game. note that the initial state provided does have to match the true initial state actually used to arrive at the given final state.
 
 
-This article explains my solution to the Kaggle Competition: Reverse Game of Life 2020. We will go over the Game of Life itself, the competition description, and then a walk through of the code for my solution (all code is avaliable on github [here](https://github.com/cjm715/kaggle-game-of-life)).
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- ==================== -->
-
-
-# What is Conway's game of life?
-
-
-
-It is a cellular automaton created by the mathematician John Conway. It consists of a grid where each cell can have either one of two states: dead and alive. The grid is updated each time step by these set of rules:
-- If a cell is alive and there are exactly 2 or 3 alive neighbors (out of the 8 neighbors in its Moore neighborhood), then the cell remains alive in the next time step.
-- If the cell is dead and there are exactly 3 alive neighbors, then the cell is becomes alive in the next time steps.
-- For all other cases, the cell is dead in the next time step.
-
-The game of life can be initialized in any grid configuration of alive and dead cells.
-
-# The competition problem statement
-Given only the final state of the game of life and the number of time steps between the final and initial states, determine an initial state that when evolved forward in time according the rules of the game of life closely matches the final site. The closeness between this evolved final state and the given final state is given by mean absolute error of the predictions across cells and multiple instances of the game. note that the initial state provided does have to match the true initial state actually used to arrive at the given final state.
-
-
-# This solution
+## This solution
 
 The solution provided in this repository uses simulated annealing to solve this challenge. The initial state is solved for by evaluating the mean absolute error on the evolved final state. This error is the cost. For each iteration, a cell is flipped from alive to dead or from dead to alive in the initial state and then the cost is evaluated. If the cost deceased, it will update the initial state guess to this new flipped version. Otherwise, the grid will pick this new version with a certain probability dependent on the change in cost and a temperature variable. Over many iterations, the initial state will tend towards a state that results in a small cost (= mean absolute error).  
 
-# Code
+## Code
 
 ```python
 import torch
