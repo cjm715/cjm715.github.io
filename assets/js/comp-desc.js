@@ -7,56 +7,93 @@ let comp_desc = function(p){
     let columns;
     let canvasWidth;
     let canvasHeight;
-
+    let blueColor = p.color('#3e9bf4');
+    let blackColor = p.color('#000000');
     p.setup = function() {
-      p.frameRate(8);
+        p.frameRate(8);
 
-      columns = 25;
-      rows = 25;
+        columns = 25;
+        rows = 25;
 
-      width = columns * w;
-      height = rows * w;
+        width = columns * w;
+        height = rows * w;
 
-      canvasWidth = width*4 + 5*pad;
-      canvasHeight = 1.5*height;
+        canvasWidth = width*4 + 5*pad;
+        canvasHeight = 1.5*height;
 
-      let cnv = p.createCanvas(canvasWidth, canvasHeight);
-      //cnv.parent('canvasDiv2');
-      //cnv.position(document.body.clientWidth/2 + width/2)
-      //cnv.position(x=document.body.clientWidth/2 - width/2,      positionType='sticky');
-     // cnv.position(50, 0, 'relative');
+        let cnv = p.createCanvas(canvasWidth, canvasHeight);
+        //cnv.parent('canvasDiv2');
+        //cnv.position(document.body.clientWidth/2 + width/2)
+        //cnv.position(x=document.body.clientWidth/2 - width/2,      positionType='sticky');
+        // cnv.position(50, 0, 'relative');
 
-      // Wacky way to make a 2D array in JS
-      board = new Array(columns);
-      for (let i = 0; i < columns; i++) {
-        board[i] = new Array(rows);
-      }
+        // Wacky way to make a 2D aray in JS
+        board = new Array(columns);
+        for (let i = 0; i < columns; i++) {
+            board[i] = new Array(rows);
+        }
 
-      // Going to use multiple 2D arrays and swap them
-      next = new Array(columns);
-      for (i = 0; i < columns; i++) {
-        next[i] = new Array(rows);
-      }
-      p.init();
-      //
+        // Going to use multiple 2D arrays and swap them
+        next = new Array(columns);
+        for (i = 0; i < columns; i++) {
+            next[i] = new Array(rows);
+        }
+        p.init();
+        //
 
-      white_col = p.color('#FFFFFF')
-      p.background(white_col);
+        white_col = p.color('#FFFFFF')
+        p.background(white_col);
 
-      for (i = 0; i < 10; i++) {
+        // generate 10 steps before first start state
+        for (i = 0; i < 10; i++) {
           p.generate()
-      }
+        }
 
-      p.drawBoard(pad, pad)
+        // t=0 state (start state)
+        p.drawBoard(pad, pad)
 
-      p.generate();
-      p.drawBoard(width+2*pad, pad)
-      p.generate();
+        p.textSize(16);
+        p.fill(blackColor);
+        p.noStroke()
+        p.text('t=0 (start)', width/2-pad, height + 2.1*pad);
 
-      p.drawBoard(2*width + 3*pad, pad)
+        // t = 1 state
+        p.generate();
+        p.drawBoard(width+2*pad, pad)
 
-      p.generate();
-      p.drawBoard(3*width + 4*pad, pad)
+        // t = 2 state
+        p.generate();
+        p.drawBoard(2*width + 3*pad, pad)
+
+        // t =  3 state (stop state)
+        p.generate();
+        p.drawBoard(3*width + 4*pad, pad)
+        p.textSize(16);
+        p.fill(blackColor);
+        p.noStroke()
+        p.text('t=3 (stop)', 3.5*width +pad, height + 2.1*pad);
+
+        // Time text
+        p.textSize(16);
+        //p.textAlign(p.CENTER);
+        p.fill(blackColor);
+        p.noStroke()
+        p.text('time',2*width + pad,height + 3.5*pad,canvasWidth);
+
+        // Arrow
+        base = p.createVector(canvasWidth/2-4*pad, height+4*pad)
+        vec = p.createVector(8*pad, 0)
+        p.push();
+        p.stroke(blackColor);
+        p.strokeWeight(2);
+        p.fill(blackColor);
+        p.translate(base.x, base.y);
+        p.line(0, 0, vec.x, vec.y);
+        p.rotate(vec.heading());
+        let arrowSize = 5;
+        p.translate(vec.mag() - arrowSize, 0);
+        p.triangle(0, arrowSize / 2, 0, -arrowSize / 2, arrowSize, 0);
+        p.pop();
 
     }
 

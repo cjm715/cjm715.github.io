@@ -24,7 +24,7 @@ In 1970, the late British mathematician John Horton Conway, who sadly left us on
 <img src="{{site.url}}/assets/images/John_H_Conway_2005.jpeg"  width="300" class="image_post">
 </a>
 
-<sub>*Mathematician John H. Conway. This image is from the Wikipedia article on ["John Horton Conway"](https://commons.wikimedia.org/wiki/File:John_H_Conway_2005_(cropped).jpg) and authored by [Thane Plambeck](https://www.flickr.com/photos/thane/20366806/) under license [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/deed.en).*</sub>
+<sub>*Mathematician John H. Conway. This image is from the Wikipedia article on ["John Horton Conway"](https://commons.wikimedia.org/wiiFile:John_H_Conway_2005_(cropped).jpg) and authored by [Thane Plambeck](https://www.flickr.com/photos/thane/20366806/) under license [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/deed.en).*</sub>
 
 <br/>
 <!-- END OF IMAGE -->
@@ -48,7 +48,7 @@ The simulation below is the game of life running live within this browser. Blue 
 </div>
 
 
-<sub>*Click anywhere to restart the game of life. This is a modification of the original ["Game of Life"](https://p5js.org/examples/simulate-game-of-life.html) p5.js example by [Daniel Shiffman](https://natureofcode.com/) licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).*</sub>
+<sub>*Click anywhere to restart the game of life. This and all other game-of-life simulations in this post are modifications of the original ["Game of Life"](https://p5js.org/examples/simulate-game-of-life.html) p5.js example by [Daniel Shiffman](https://natureofcode.com/) licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).*</sub>
 
 <br/>
 <!-- END OF SIMULATION -->
@@ -80,11 +80,13 @@ If your restart the game above (by clicking on the simulation), you will find th
 ## The competition problem statement
 Given only the final state of the game of life (on a 25x25 grid) and the number of time steps between the final and initial states, determine an initial state that when evolved forward in time according the rules of the game of life closely matches the final state. For instance, suppose the final state given is the pattern below:
 
-<!-- BEGINNING OF GLIDER SIMULATION -->
+<!-- BEGINNING OF TIMELINE SIMULATION-->
 <script src="{{ base.url | prepend: site.url }}/assets/js/comp-desc.js"></script>
 
 <div id='compDescDiv'>
 </div>
+
+<sub>*Click anywhere above to draw a new example.*</sub>
 
 <br/>
 <!-- END OF SIMULATION -->
