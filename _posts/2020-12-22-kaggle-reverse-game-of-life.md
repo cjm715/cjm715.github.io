@@ -93,14 +93,18 @@ For instance, suppose we have the following sequence of grid states appearing in
 <br/>
 <!-- END OF SIMULATION -->
 
-The given state would be the last state or stop state at t=3. The other states are not given in the kaggle dataset. The task is to find an initial state or start state at t=0 that would evolve forward in time to a state that is close to the given stop state. Notice that it does not have to evolve to a state that is exactly the given stop state --- it only needs to be close. The closeness between this evolved stop state and the given stop state is measured by the mean absolute error of the predictions across cells. Also, note that even if we are successful at finding a start state that evolves to the exact stop state, it is possible that this discovered start state does not match the true start state that was used originally. This is due to the fact that multiple states can lead to the same state by the nature of the Game of Life rules.
+The given state would be the last state or stop state at t=3. The other states are not given in the Kaggle test data set. The task is to find an initial state or start state at t=0 that would evolve forward in time to a state that is close to the given stop state.
 
+Notice that it does not have to evolve to a state that is exactly the given stop state --- it only needs to be close. The closeness between this evolved stop state and the given stop state is measured by the mean absolute error of the predictions across cells. Also, note that even if we are successful at finding a start state that evolves to the exact stop state, it is possible that this discovered start state does not match the true start state that was used originally. This is due to the fact that multiple states can lead to the same state by the nature of the Game of Life rules.
+
+The number of time steps between the start and stop state, or also referred to as delta, varies from 1 to 5 throughout the test data set. The above example would be for an instance that has a delta of 3. There are roughly 10,000 instances in the test data set for each delta giving a total of 50,000 instances to solve.
 
 
 
 ## This solution
 
 The solution provided in this repository uses simulated annealing to solve this challenge. The initial state is solved for by evaluating the mean absolute error on the evolved final state. This error is the cost. For each iteration, a cell is flipped from alive to dead or from dead to alive in the initial state and then the cost is evaluated. If the cost deceased, it will update the initial state guess to this new flipped version. Otherwise, the grid will pick this new version with a certain probability dependent on the change in cost and a temperature variable. Over many iterations, the initial state will tend towards a state that results in a small cost (= mean absolute error).  
+
 
 ## Code
 
