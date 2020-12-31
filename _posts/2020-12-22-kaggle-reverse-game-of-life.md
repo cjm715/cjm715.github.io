@@ -9,7 +9,7 @@ categories: data
 
 
 
-This article explains my solution to the Kaggle Competition: Reverse Game of Life 2020. We will go over the Game of Life itself, the competition description, and then a walk through of the code for my solution (all code is available on github [here](https://github.com/cjm715/kaggle-game-of-life)).
+This article explains my solution to the Kaggle Competition: Reverse Game of Life 2020. We will go over the Game of Life itself, the competition description, and then a walk through of the code for my solution (all code is available on github [here](https://github.com/cjm715/kaggle-game-of-life)). The use of pytorch for GPU computation were essential to my approach. It was fun using pytorch for something other than neural networks!
 
 
 
@@ -163,4 +163,4 @@ With this pytorch implementation, we can do two things to help us speed this par
 
 Running multiple simultaneous simulations is very similar to the way the convolution operation is used in CNNs where it applied to multiple layers of an image and/or multiple images at once. By breaking up the data set into 5 groups according to the time delta between start and stop states, it is possible to evolve thousands of simulations simultaneously if they shared the same time delta. By making these changes, it is possible to simultaneously solve multiple optimization problems for each given stop state in the data set.
 
-You can find all the code [here](https://github.com/cjm715/kaggle-game-of-life) on github. To get the final score on Kaggle, I ran this code on a Nvidia GTX 1080 TI GPU for multiple days and restarted the code with slightly different temperature schedule within the simulated annealing algorithm. 
+You can find all the code [here](https://github.com/cjm715/kaggle-game-of-life) on github. To get the final score on Kaggle, I ran this code on a Nvidia GTX 1080 TI GPU for multiple days and restarted the code with slightly different temperature schedule within the simulated annealing algorithm.
