@@ -104,7 +104,15 @@ The number of time steps between the start and stop state, or also referred to a
 
 I used simulated annealing to solve this problem. Simulated annealing is a heuristic probabilistic method for approximating a global optimum. It is inspired by the annealing process in metallurgy, a method of heating and cooling in a controlled way to reduce a metal's defects.
 
-The competition task is framed as an optimization problem. The cost function $$f(x_{start})$$ is the closeness of the stop state $$x_{stop}$$ using the guess $$x_{start}$$ as our start state. The objective is to find the best $$x_{start}$$ that minimizes $$f(x_{start})$$.
+The competition task is framed as an optimization problem. The cost function $$f(x)$$ is the closeness of the stop state $$y$$ using the guess $$x$$ as our start state. $$x$$ and $$y$$ are matrices representing the grid where a single element is either $$0$$ for dead and $$1$$ for alive. The objective is to find the best $$x$$ that minimizes $$f(x)$$.
+
+The function $$f$$ measures the closeness of our solution given by $$f(x) = \sum_{i,j} \vert y(x)_{i,j} - y^{true}_{i,j}\vert $$ where $$y(x)$$ is the evolved stop state from the start state $$x$$ according the rules of the game of life.
+
+To apply simulated annealing we need a way to modify $$x$$ slightly to generate a new version $$x'$$ with the hope that will generate a lower value of $$f(x)$$. We will do this just by flipping a cell at random from alive to dead or dead to alive within $$x$$ to create $$x'$$. If the newly generated $$x'$$ does produce a lower cost $$(f(x') < f(x))$$, then we keep x' and continue to the next iteration. Otherwise, if $$
+
+
+
+
 
 
 
