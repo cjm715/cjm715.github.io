@@ -78,7 +78,7 @@ If your restart the game above (by clicking on the simulation), you will find th
 <!-- END OF SIMULATION -->
 
 ## The competition problem statement
-Given only the final state of the game of life (on a 25x25 grid) and the number of time steps between the final and initial states, determine an initial state that when evolved forward in time according the rules of the game of life closely matches the given final state.
+Given only the final state of the game of life (on a 25x25 grid) and the number of time steps between the final and initial states, determine an initial state that when eolved forward in time according the rules of the game of life closely matches the given final state.
 
 For instance, suppose we have the following sequence of grid states appearing in the game of life:
 
@@ -100,49 +100,19 @@ Notice that it does not have to evolve to a state that is exactly the given stop
 The number of time steps between the start and stop state, or also referred to as delta, varies from 1 to 5 throughout the test data set. The above example would be for an instance that has a delta of 3. There are roughly 10,000 instances in the test data set for each delta giving a total of 50,000 instances to solve.
 
 
+##  Simulated Annealing
 
-## This solution
+I used simulated annealing to solve this problem. Simulated annealing is a heuristic probabilistic method for approximating a global optimum. It is inspired by the annealing process in metallurgy, a method of heating and cooling in a controlled way to reduce a metal's defects.
 
-The solution provided in this repository uses simulated annealing to solve this challenge. The initial state is solved for by evaluating the mean absolute error on the evolved final state. This error is the cost. For each iteration, a cell is flipped from alive to dead or from dead to alive in the initial state and then the cost is evaluated. If the cost deceased, it will update the initial state guess to this new flipped version. Otherwise, the grid will pick this new version with a certain probability dependent on the change in cost and a temperature variable. Over many iterations, the initial state will tend towards a state that results in a small cost (= mean absolute error).  
+The competition task is framed as an optimization problem. The cost function $$f(x_{start})$$ is the closeness of the stop state $$x_{stop}$$ using the guess $$x_{start}$$ as our start state. The objective is to find the best $$x_{start}$$ that minimizes $$f(x_{start})$$.
 
 
-## Code
 
-```python
-import torch
-import numpy as np
-import matplotlib.pyplot as plt
-import torch.nn.functional as F
-from IPython.display import clear_output
-import random
 
-grid_shape = (25,25)
-np_grid = np.random.randint(0, 2, grid_shape).astype(int)
-grid = torch.from_numpy(np_grid).type(torch.int)
 
-mask = torch.tensor([[1,1,1],
-                     [1,0,1],
-                     [1,1,1]]).type(torch.int)
 
-for _ in range(200):
-    grid_padded = F.pad(grid.view(1,1,*grid_shape),(1,1,1,1), mode="circular")
-    s_layer = F.conv2d(grid_padded.view(1,1,grid_shape[0]+2, grid_shape[1]+2),
-                       mask.view(1,1,3,3)).view(*grid_shape)
-    sum_is_2 = s_layer == 2
-    sum_is_3 = s_layer == 3
-    is_alive = grid == 1
-    cond_prev_alive = torch.logical_and(
-        torch.logical_or(sum_is_2, sum_is_3),
-        is_alive)
-    cond_prev_dead = torch.logical_and(
-        sum_is_3,
-        torch.logical_not(is_alive))
-    grid = torch.logical_or(cond_prev_alive, cond_prev_dead)
-    grid = grid.type(torch.int)
-    clear_output(wait=True)
-    plt.imshow(grid, cmap='Greys',  interpolation='nearest')
-    plt.pause(0.02)
-```
+## Speed up of forward evolution by pytorch and GPU
+
 
 ```python
 
