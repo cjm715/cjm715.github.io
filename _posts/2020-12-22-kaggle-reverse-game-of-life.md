@@ -102,7 +102,7 @@ The number of time steps between the start and stop state, or also referred to a
 
 ##  Simulated Annealing
 
-I used simulated annealing to solve this problem. Simulated annealing is a heuristic probabilistic method for approximating a global optimum. It is inspired by the annealing process in metallurgy, a method of heating and cooling in a controlled way to reduce a metal's defects by slowly lowering the temperature of the metal as a method to converge to lowest energy state of metal.  A metal that is heated and then cooled under a temperature schedule will get close to the lowest possible energy by means of thermal fluctuations.
+I used simulated annealing to solve this problem. Simulated annealing is a heuristic probabilistic method for approximating a global optimum. It is inspired by the annealing process in metallurgy, a method of heating and cooling in a controlled way to reduce a metal's defects by slowly lowering the temperature of the metal as a method to converge to lowest energy state of metal.  
 
 The competition task is framed as an optimization problem. The cost function $$f(x)$$ is the closeness of the stop state $$y$$ using the guess $$x$$ as our start state. $$x$$ and $$y$$ are matrices representing the grid where a single element is either $$0$$ for dead and $$1$$ for alive. The objective is to find the best $$x$$ that minimizes $$f(x)$$. The way simulated annealing works is by starting off with a guess for $$x$$ and then considers a slightly different candidate solution $$x'$$, then we throw away the worst of the two according to $$f$$ with a certain probability $$p$$. Then, we repeat this process for the picked one from the last iteration  and call it $$z$$ and produce another variant $$z'$$, and we continue this process repeatedly until we get to a point where the cost doesn't change much. Let's now be more specific and define $$f$$ and the probability $$p$$ exactly.
 
@@ -116,11 +116,9 @@ To apply simulated annealing we need a way to modify $$x$$ slightly to generate 
 
 
 
+## Speed up of simulation by pytorch and GPU
 
-
-
-## Speed up of forward evolution $$y(x)$$ by pytorch and GPU
-
+The evaluation of $$y(x)$$, which is computed within $$f(x)$$, is the computational bottleneck of the entire algorithm. The computation $$y(x)$$ is nothing more than running the Game of Life simulation forward in time from state $$x$$ to state $$y$$. It turns out that this simulation can be done with about 40 lines of python by taking advantage of pytorch operations as shown  below. The core computation is finding the total number number of alive neighbors around each cell. This can be done with a convolution pytorch operation that is primarily used for convolutional neural networks (CNNs).
 
 ```python
 import torch
@@ -130,35 +128,28 @@ import torch.nn.functional as F
 from IPython.display import clear_output
 import random
 
+
 grid_shape = (25,25)
 mask = torch.tensor([[1,1,1],
                      [1,0,1],
                      [1,1,1]]).type(torch.int)
 
-# Initialize grid
+# Initialize random grid
 np_grid = np.random.randint(0, 2, grid_shape).astype(int)
 grid = torch.from_numpy(np_grid).type(torch.int)
 
-
 for i in range(20):
-    # s_layer is a matrix where a single element is the sum of the alive neighbors
-    # around that cell in the grid.
+    # Apply game of life rules and update grid. sum_grid holds the total number
+    # of alive neighbors around each cell. It is calculated by convolution!
     grid_padded = F.pad(grid.view(1,1,*grid_shape),(1,1,1,1), mode="circular")
-    s_layer = F.conv2d(grid_padded.view(1,1,grid_shape[0]+2, grid_shape[1]+2),
+    sum_grid = F.conv2d(grid_padded.view(1,1,grid_shape[0]+2, grid_shape[1]+2),
                        mask.view(1,1,3,3)).view(*grid_shape)
-
-    # implement game of life rules
-    sum_is_2 = s_layer == 2
-    sum_is_3 = s_layer == 3
-    is_alive = grid == 1
     cond_prev_alive = torch.logical_and(
-        torch.logical_or(sum_is_2, sum_is_3),
-        is_alive)
+        torch.logical_or(sum_grid == 2, sum_grid == 3),
+        grid == 1)
     cond_prev_dead = torch.logical_and(
-        sum_is_3,
-        torch.logical_not(is_alive))   
-
-    # update grid
+        sum_grid == 3,
+        grid == 0)   
     grid = torch.logical_or(cond_prev_alive, cond_prev_dead)
     grid = grid.type(torch.int)
 
@@ -168,4 +159,8 @@ for i in range(20):
     plt.pause(0.02)
 ```
 
-You can find the code [here](https://github.com/cjm715/kaggle-game-of-life) on github.
+With this pytorch implementation, we can do two things to help us speed this part of the code: (1) use pytorch on GPU to speed up tensor operations like the convolution step and (2) run multiple simulations at once.
+
+Running multiple simultaneous simulations is very similar to the way the convolution operation is used in CNNs where it applied to multiple layers of an image and/or multiple images at once. By breaking up the data set into 5 groups according to the time delta between start and stop states, it is possible to evolve thousands of simulations simultaneously if they shared the same time delta. By making these changes, it is possible to simultaneously solve multiple optimization problems for each given stop state in the data set.
+
+You can find all the code [here](https://github.com/cjm715/kaggle-game-of-life) on github. To get the final score on Kaggle, I ran this code on a Nvidia GTX 1080 TI GPU for multiple days and restarted the code with slightly different temperature schedule within the simulated annealing algorithm. 
