@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "6th place in Kaggle Reverse Game of Life Competition"
+title: "6th place in Kaggle Reverse Game of Life Competition using pytorch and GPU compute"
 author:
 - Chris Miles   
 categories: data
