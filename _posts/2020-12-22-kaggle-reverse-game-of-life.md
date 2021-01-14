@@ -111,12 +111,11 @@ The function $$f$$ measures the closeness of our solution given by $$f(x) = \sum
 To apply simulated annealing we need a way to modify $$x$$ slightly to generate a new version $$x'$$ with the hope that will generate a lower value of $$f(x)$$. We will do this just by flipping a cell at random from alive to dead or dead to alive within $$x$$ to create $$x'$$. If the newly generated $$x'$$ does produce a lower cost $$(f(x') < f(x))$$, then we keep $$x'$$ and continue to the next iteration. Otherwise if $$(f(x') >= f(x))$$, then we accept the new state with a probability given by $$p = \exp(-(f(x)-f(x'))/T)$$ where $$T$$ is the temperature.
 
 
-
-
-
-
-
 ## Speed up of simulation by pytorch and GPU
+
+<img src="{{site.url}}/assets/images/gpu5.JPG" class="image_post">
+<!-- <img src="{{site.url}}/assets/images/keyboard.JPG" class="image_post"> -->
+
 
 The evaluation of $$y(x)$$, which is computed within $$f(x)$$, is the computational bottleneck of the entire algorithm. The computation $$y(x)$$ is nothing more than running the Game of Life simulation forward in time from state $$x$$ to state $$y$$. It turns out that this simulation can be done with about 40 lines of python by taking advantage of pytorch operations as shown  below. The core computation is finding the total number number of alive neighbors around each cell. This can be done with a convolution pytorch operation that is primarily used for convolutional neural networks (CNNs).
 
