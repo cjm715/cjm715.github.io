@@ -24,3 +24,68 @@ canvas {
   margin-right: auto;
   border: 5px solid #3e9bf4;
 }
+
+
+
+body {
+  background-color: #242424;
+  color: #e0e0e0;
+}
+
+a {
+  color: #90caf9;
+}
+a:hover {
+  color: #64b5f6;
+}
+
+.site-title, .site-nav {
+  color: #ffffff;
+}
+
+.highlight, pre, code {
+  background-color: #1e1e1e;
+  color: #dcdcdc;
+}
+
+.site-footer {
+  background-color: #242424;
+  color: #888;
+}
+
+
+
+/* Override default light background for code blocks */
+.highlight, pre, code {
+  background-color: #1e1e1e !important;
+  color: #dcdcdc !important;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 5px;
+  overflow-x: auto;
+}
+
+/* Optional: tweak individual token colors */
+.highlight .k,     /* keyword */
+.highlight .nb,    /* built-in name */
+.highlight .c,     /* comments */
+.highlight .s,     /* strings */
+.highlight .o {    /* operators */
+  color: #a8c3ff;
+}
+
+.highlight .n {    /* names / variables */
+  color: #ffffff;
+}
+
+.highlight .err {
+  background-color: #ff0000;
+  color: #ffffff;
+}
+
+.site-title {
+  font-family: 'Helvetica', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
