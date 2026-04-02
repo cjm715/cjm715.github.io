@@ -27,9 +27,8 @@ permalink: /publications/
       </p>
     </div>
     <div class="publication-links">
+      <a href="https://people.math.wisc.edu/~spagnolie/Papers/amatter18.pdf">PDF</a>
       <a href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.122.098002">Journal</a>
-      <a href="https://doi.org/10.1103/PhysRevLett.122.098002">DOI</a>
-      <a href="https://pubmed.ncbi.nlm.nih.gov/30932541/">PubMed</a>
     </div>
   </article>
 
@@ -43,8 +42,8 @@ permalink: /publications/
       </p>
     </div>
     <div class="publication-links">
+      <a href="https://arxiv.org/pdf/1712.07187.pdf">PDF</a>
       <a href="https://iopscience.iop.org/article/10.1088/1361-6544/aab1c8/meta">Journal</a>
-      <a href="https://doi.org/10.1088/1361-6544/aab1c8">DOI</a>
     </div>
   </article>
 
@@ -58,8 +57,8 @@ permalink: /publications/
       </p>
     </div>
     <div class="publication-links">
-      <a href="https://doi.org/10.1007/s00332-017-9400-7">DOI</a>
       <a href="https://www.researchgate.net/profile/Charles-Doering/publication/318171722_A_Shell_Model_for_Optimal_Mixing/links/5d6e3f6b299bf1808d6211e2/A-Shell-Model-for-Optimal-Mixing.pdf">PDF</a>
+      <a href="https://link.springer.com/article/10.1007/s00332-017-9400-7">Journal</a>
     </div>
   </article>
 
@@ -74,7 +73,21 @@ permalink: /publications/
     </div>
     <div class="publication-links">
       <a href="https://pubs.aip.org/aip/jap/article/120/3/034903/143615">Journal</a>
-      <a href="https://doi.org/10.1063/1.4958907">DOI</a>
+    </div>
+  </article>
+
+  <article class="publication-card">
+    <div class="publication-main">
+      <h3>Optimal Control of the Advection-Diffusion Equation for Effective Fluid Mixing</h3>
+      <p class="publication-authors">Christopher J. Miles</p>
+      <p class="publication-venue">Ph.D. Thesis, University of Michigan, 2018</p>
+      <p class="publication-summary">
+        Doctoral thesis repository, including source, figures, and supporting material.
+      </p>
+    </div>
+    <div class="publication-links">
+      <a href="/assets/pdfs/thesis_cjm.pdf">PDF</a>
+      <a href="https://github.com/cjm715/phdthesis">Repository</a>
     </div>
   </article>
 </section>
