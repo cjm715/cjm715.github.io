@@ -7,3 +7,7 @@
 #
 layout: home
 ---
+
+<section class="home-intro">
+  <h1>Blog on AI compute, physics, and math.</h1>
+</section>

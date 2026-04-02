@@ -1,1 +1,28 @@
-// Placeholder to allow overriding predefined variables smoothly.
+// Minimal dark editorial theme.
+
+$base-font-family: "IBM Plex Sans", sans-serif;
+$code-font-family: "IBM Plex Mono", monospace;
+
+$brand-color: #8a97a6;
+$brand-color-light: #141b23;
+$brand-color-dark: #f2efe8;
+
+$site-title-color: #f2efe8;
+$text-color: #d8e0e7;
+$background-color: #0b0f13;
+$content-background-color: #11161d;
+
+$link-base-color: #9ad8db;
+$link-visited-color: #aebafc;
+$link-hover-color: #c1f0ec;
+
+$border-color-01: #222c37;
+$border-color-02: #344252;
+$border-color-03: #cfd7e1;
+
+$code-background-color: #0f141b;
+$table-text-color: #d8e0e7;
+$table-zebra-color: #111922;
+$table-header-bg-color: #161f29;
+$table-header-border: #2c3948;
+$table-border-color: #222c37;
