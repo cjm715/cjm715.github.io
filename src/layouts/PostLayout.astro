@@ -1,0 +1,65 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  date: Date;
+  category: string;
+  description?: string;
+  prevPost?: { slug: string; title: string };
+  nextPost?: { slug: string; title: string };
+}
+
+const { title, date, category, description, prevPost, nextPost } = Astro.props;
+
+const dateStr = date.toLocaleDateString('en-US', {
+  year: 'numeric', month: 'long', day: 'numeric',
+  timeZone: 'UTC',
+});
+---
+<BaseLayout title={`${title} — Chris Miles`} description={description} isPost={true}>
+  <Nav />
+
+  <div class="post-layout">
+    <div class="container">
+      <header class="post-header">
+        <div class="post-header__kicker">
+          <span class="post-header__category">{category}</span>
+          <span class="post-header__sep">·</span>
+          <span>{dateStr}</span>
+        </div>
+        <h1 class="post-header__title">{title}</h1>
+      </header>
+    </div>
+
+    <div class="container">
+      <div class="post-body">
+        <div class="post-content">
+          <slot />
+        </div>
+
+        <nav class="post-nav">
+          <a href="/" class="post-nav__back">← All posts</a>
+          <div class="post-nav__arrows">
+            {prevPost && (
+              <a href={`/posts/${prevPost.slug}`} class="post-nav__link">
+                <span class="post-nav__dir">← Previous</span>
+                {prevPost.title}
+              </a>
+            )}
+            {nextPost && (
+              <a href={`/posts/${nextPost.slug}`} class="post-nav__link" style="text-align: right;">
+                <span class="post-nav__dir">Next →</span>
+                {nextPost.title}
+              </a>
+            )}
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>

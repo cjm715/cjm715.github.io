@@ -1,0 +1,298 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const allPosts = await getCollection('posts');
+const posts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+function fmtDate(d: Date) {
+  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
+}
+---
+<BaseLayout title="Chris Miles">
+  <Nav home={true} />
+
+  <!-- ── Hero ──────────────────────────────────────────────── -->
+  <section class="hero" id="home">
+    <canvas class="hero__canvas" id="lorenz-canvas"></canvas>
+    <div class="hero__overlay"></div>
+    <div class="container">
+      <div class="hero__content">
+        <p class="hero__eyebrow">Data Scientist &nbsp;·&nbsp; ML Engineer &nbsp;·&nbsp; Applied Mathematician</p>
+        <h1 class="hero__name">Chris<br>Miles</h1>
+        <p class="hero__tagline">
+          Writing on machine learning, physics, and hardware.<br>
+          Theory, code, and computation — built to be understood.
+        </p>
+        <div class="hero__links">
+          <a href="#writing" class="btn btn--primary">Writing</a>
+          <a href="#about" class="btn btn--ghost">About</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Writing ────────────────────────────────────────────── -->
+  <section class="section" id="writing">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__kicker">Writing</p>
+        <h2 class="section__title">Posts on AI, physics, and hardware</h2>
+      </div>
+      <div class="posts-grid">
+        {posts.map(post => (
+          <a href={`/posts/${post.slug}`} class="post-card">
+            <div class="post-card__meta">
+              <span class="post-card__category">{post.data.category}</span>
+              <span class="post-card__date">{fmtDate(post.data.date)}</span>
+            </div>
+            <h3 class="post-card__title">{post.data.title}</h3>
+            <p class="post-card__excerpt">{post.data.excerpt}</p>
+            <span class="post-card__cta">Read →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ── Research ───────────────────────────────────────────── -->
+  <section class="section" id="research">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__kicker">Research</p>
+        <h2 class="section__title">Selected publications</h2>
+      </div>
+
+      <div class="publications-list">
+
+        <div class="publication-item">
+          <div class="publication-item__body">
+            <h3 class="publication-item__title">Active matter invasion of a viscous fluid: Unstable sheets and a no-flow theorem</h3>
+            <p class="publication-item__authors">Christopher J. Miles, Arthur A. Evans, Michael J. Shelley, Saverio E. Spagnolie</p>
+            <p class="publication-item__venue">Physical Review Letters · 2019</p>
+            <p class="publication-item__excerpt">Theoretical study of active matter at fluid interfaces, analyzing instability formation and flow constraints in a viscous setting.</p>
+          </div>
+          <div class="publication-item__links">
+            <a href="https://people.math.wisc.edu/~spagnolie/Papers/amatter18.pdf" class="publication-link" target="_blank" rel="noopener">PDF</a>
+            <a href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.122.098002" class="publication-link" target="_blank" rel="noopener">Journal</a>
+          </div>
+        </div>
+
+        <div class="publication-item">
+          <div class="publication-item__body">
+            <h3 class="publication-item__title">Diffusion-limited mixing by incompressible flows</h3>
+            <p class="publication-item__authors">Christopher J. Miles, Charles R. Doering</p>
+            <p class="publication-item__venue">Nonlinearity · 2018</p>
+            <p class="publication-item__excerpt">How diffusion constrains the effectiveness of optimal incompressible flows, with consequences for achievable mixing rates and filament scales.</p>
+          </div>
+          <div class="publication-item__links">
+            <a href="https://arxiv.org/pdf/1712.07187.pdf" class="publication-link" target="_blank" rel="noopener">PDF</a>
+            <a href="https://iopscience.iop.org/article/10.1088/1361-6544/aab1c8/meta" class="publication-link" target="_blank" rel="noopener">Journal</a>
+          </div>
+        </div>
+
+        <div class="publication-item">
+          <div class="publication-item__body">
+            <h3 class="publication-item__title">A Shell Model for Optimal Mixing</h3>
+            <p class="publication-item__authors">Christopher J. Miles, Charles R. Doering</p>
+            <p class="publication-item__venue">Journal of Nonlinear Science · 2018</p>
+            <p class="publication-item__excerpt">Reduced shell-model formulation for studying optimal mixing, capturing multiscale transport behavior while remaining analytically tractable.</p>
+          </div>
+          <div class="publication-item__links">
+            <a href="https://www.researchgate.net/profile/Charles-Doering/publication/318171722_A_Shell_Model_for_Optimal_Mixing/links/5d6e3f6b299bf1808d6211e2/A-Shell-Model-for-Optimal-Mixing.pdf" class="publication-link" target="_blank" rel="noopener">PDF</a>
+            <a href="https://link.springer.com/article/10.1007/s00332-017-9400-7" class="publication-link" target="_blank" rel="noopener">Journal</a>
+          </div>
+        </div>
+
+        <div class="publication-item">
+          <div class="publication-item__body">
+            <h3 class="publication-item__title">Nucleation pressure threshold in acoustic droplet vaporization</h3>
+            <p class="publication-item__authors">Christopher J. Miles, Charles R. Doering, Oliver D. Kripfgans</p>
+            <p class="publication-item__venue">Journal of Applied Physics · 2016</p>
+            <p class="publication-item__excerpt">Theoretical treatment of the pressure threshold for droplet vaporization under ultrasound, aimed at clarifying phase-change contrast-agent behavior.</p>
+          </div>
+          <div class="publication-item__links">
+            <a href="https://pubs.aip.org/aip/jap/article/120/3/034903/143615" class="publication-link" target="_blank" rel="noopener">Journal</a>
+          </div>
+        </div>
+
+        <div class="publication-item">
+          <div class="publication-item__body">
+            <h3 class="publication-item__title">Optimal Control of the Advection-Diffusion Equation for Effective Fluid Mixing</h3>
+            <p class="publication-item__authors">Christopher J. Miles</p>
+            <p class="publication-item__venue">Ph.D. Thesis, University of Michigan · 2018</p>
+            <p class="publication-item__excerpt">Doctoral thesis investigating optimal mixing strategies through control-theoretic analysis of the advection-diffusion equation.</p>
+          </div>
+          <div class="publication-item__links">
+            <a href="https://cjm715.github.io/assets/pdfs/thesis_cjm.pdf" class="publication-link" target="_blank" rel="noopener">PDF</a>
+            <a href="https://github.com/cjm715/phdthesis" class="publication-link" target="_blank" rel="noopener">Repository</a>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="scholar-note">
+        Full citation record on <a href="https://scholar.google.com/citations?user=nLpWYR8AAAAJ" target="_blank" rel="noopener">Google Scholar</a>.
+      </p>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ── About ──────────────────────────────────────────────── -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__kicker">About</p>
+        <h2 class="section__title">Background</h2>
+      </div>
+      <div class="about-grid">
+
+        <div class="about-text">
+          <p>
+            I'm a <strong>data scientist and machine learning engineer</strong> with a background in physics, applied mathematics, and scientific computing.
+          </p>
+          <p>
+            My work sits at the intersection of AI, computation, and mathematical modeling. Across industry and research settings, I've worked on machine learning, optimization, forecasting, simulation, and technical software — with Python as the main tool for building models and experiments.
+          </p>
+          <p>
+            That training shapes the way I approach engineering problems: start from the mechanism, make the assumptions explicit, and build models that are useful rather than decorative.
+          </p>
+          <div class="about-topics">
+            <p class="about-topics__title">Topics that appear often</p>
+            <ul class="about-topics__list">
+              <li>Machine learning and optimization</li>
+              <li>Scientific computing and simulation</li>
+              <li>Mathematical models for physical systems</li>
+              <li>Technical software projects and experiments</li>
+              <li>Hardware-oriented ideas for learning systems</li>
+            </ul>
+          </div>
+          <div class="social-links">
+            <a href="https://github.com/cjm715" target="_blank" rel="noopener" class="social-link">GitHub</a>
+            <a href="https://www.linkedin.com/in/chris-john-miles/" target="_blank" rel="noopener" class="social-link">LinkedIn</a>
+            <a href="https://scholar.google.com/citations?user=nLpWYR8AAAAJ" target="_blank" rel="noopener" class="social-link">Google Scholar</a>
+            <a href="https://www.kaggle.com/cmiles715" target="_blank" rel="noopener" class="social-link">Kaggle</a>
+          </div>
+        </div>
+
+        <div class="about-credentials">
+          <div class="credential">
+            <p class="credential__school">MIT</p>
+            <p class="credential__degree">B.S. in Physics</p>
+            <p class="credential__year">Cambridge, MA</p>
+          </div>
+          <div class="credential">
+            <p class="credential__school">University of Michigan</p>
+            <p class="credential__degree">M.S. in Applied Mathematics</p>
+            <p class="credential__year">Ann Arbor, MI</p>
+          </div>
+          <div class="credential">
+            <p class="credential__school">University of Michigan</p>
+            <p class="credential__degree">Ph.D. in Physics</p>
+            <p class="credential__year">Ann Arbor, MI · 2018</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<!-- ── Lorenz Attractor Canvas ───────────────────────────── -->
+<script>
+  const canvas = document.getElementById('lorenz-canvas') as HTMLCanvasElement;
+  const ctx = canvas.getContext('2d')!;
+
+  function resize() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize, { passive: true });
+
+  const SIGMA = 10, RHO = 28, BETA = 8 / 3;
+  let lx = 0.1, ly = 0.0, lz = 0.0;
+  const TRAIL = 3500;
+  const trail: [number, number, number][] = [];
+  let angleZ = 0;
+  const TILT = 0.30;
+
+  function rk4(dt: number) {
+    const f = (x: number, y: number, z: number): [number, number, number] =>
+      [SIGMA * (y - x), x * (RHO - z) - y, x * y - BETA * z];
+    const [k1x, k1y, k1z] = f(lx, ly, lz);
+    const [k2x, k2y, k2z] = f(lx + k1x*dt/2, ly + k1y*dt/2, lz + k1z*dt/2);
+    const [k3x, k3y, k3z] = f(lx + k2x*dt/2, ly + k2y*dt/2, lz + k2z*dt/2);
+    const [k4x, k4y, k4z] = f(lx + k3x*dt, ly + k3y*dt, lz + k3z*dt);
+    lx += dt * (k1x + 2*k2x + 2*k3x + k4x) / 6;
+    ly += dt * (k1y + 2*k2y + 2*k3y + k4y) / 6;
+    lz += dt * (k1z + 2*k2z + 2*k3z + k4z) / 6;
+  }
+
+  // Warm up past transients
+  for (let i = 0; i < 3000; i++) rk4(0.007);
+
+  function project(px: number, py: number, pz: number): [number, number] {
+    const scale = Math.min(canvas.width, canvas.height) / 58;
+    const cx = canvas.width  * 0.60;
+    const cy = canvas.height * 0.50;
+    const cosA = Math.cos(angleZ), sinA = Math.sin(angleZ);
+    const rx =  px * cosA - py * sinA;
+    const ry =  px * sinA + py * cosA;
+    const rz = pz - 24;
+    return [cx + rx * scale, cy - (ry * Math.cos(TILT) - rz * Math.sin(TILT)) * scale];
+  }
+
+  const STEPS = 4, DT = 0.007, BATCH = 30;
+
+  function draw() {
+    requestAnimationFrame(draw);
+    for (let i = 0; i < STEPS; i++) {
+      rk4(DT);
+      trail.push([lx, ly, lz]);
+      if (trail.length > TRAIL) trail.shift();
+    }
+    angleZ += 0.00055;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const len = trail.length;
+    if (len < 2) return;
+
+    ctx.lineCap = 'round';
+    ctx.lineWidth = 1.0;
+
+    for (let i = 1; i < len; i += BATCH) {
+      const tMid  = (i + BATCH / 2) / len;
+      const alpha = Math.pow(tMid, 2.2) * 0.85;
+      ctx.beginPath();
+      const [sx, sy] = project(...trail[i - 1]);
+      ctx.moveTo(sx, sy);
+      const end = Math.min(i + BATCH, len);
+      for (let j = i; j < end; j++) {
+        const [px, py] = project(...trail[j]);
+        ctx.lineTo(px, py);
+      }
+      ctx.strokeStyle = `rgba(89,187,191,${alpha.toFixed(3)})`;
+      ctx.stroke();
+    }
+
+    // Glowing head
+    const [hx, hy] = project(...trail[len - 1]);
+    const grd = ctx.createRadialGradient(hx, hy, 0, hx, hy, 9);
+    grd.addColorStop(0, 'rgba(89,187,191,0.75)');
+    grd.addColorStop(1, 'rgba(89,187,191,0)');
+    ctx.beginPath();
+    ctx.arc(hx, hy, 9, 0, Math.PI * 2);
+    ctx.fillStyle = grd;
+    ctx.fill();
+  }
+
+  draw();
+</script>

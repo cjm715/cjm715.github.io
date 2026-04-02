@@ -1,0 +1,26 @@
+---
+interface Props {
+  home?: boolean; // true = anchor links, false = absolute links back to home
+}
+const { home = false } = Astro.props;
+const prefix = home ? '' : '/';
+---
+<nav class="nav" id="nav">
+  <div class="container">
+    <div class="nav__inner">
+      <a href="/" class="nav__logo">Chris Miles</a>
+      <ul class="nav__links">
+        <li><a href={home ? '#writing' : '/#writing'}>Writing</a></li>
+        <li><a href={home ? '#research' : '/#research'}>Research</a></li>
+        <li><a href={home ? '#about' : '/#about'}>About</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav?.classList.toggle('scrolled', window.scrollY > 30);
+  }, { passive: true });
+</script>
