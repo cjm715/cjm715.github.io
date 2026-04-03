@@ -222,7 +222,6 @@ function fmtDate(d: Date) {
   const TRAIL = 3500;
   const trail: [number, number, number][] = [];
   let angleZ = 0;
-  const TILT = 0.30;
 
   function rk4(dt: number) {
     const f = (x: number, y: number, z: number): [number, number, number] =>
@@ -247,7 +246,7 @@ function fmtDate(d: Date) {
     const rx =  px * cosA - py * sinA;
     const ry =  px * sinA + py * cosA;
     const rz = pz - 24;
-    return [cx + rx * scale, cy - (ry * Math.cos(TILT) - rz * Math.sin(TILT)) * scale];
+    return [cx + rx * scale, cy - rz * scale];
   }
 
   const STEPS = 4, DT = 0.007, BATCH = 30;
