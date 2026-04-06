@@ -32,7 +32,7 @@ My build is based off of the design discussed in [this video](https://www.youtub
 <figcaption>Lorenz attractor analog circuit schematic. Original circuit credit: Paul Horowitz.</figcaption>
 </figure>
 
-I'd recommend seeing the linked resources for more detail on how it works, but I'll describe it briefly here. Each differential equation in the system is implemented with an op-amp integrator and a non-inverting summing circuit. The output voltage of each op-amp corresponds to x, y, and z. The product terms $xy$ and $xz$ require two analog multipliers.
+I'd recommend seeing the linked resources for more detail on how it works, but I'll describe it briefly here. Each differential equation in the system is implemented as op-amp circuit combining an integrator and an inverting summing circuit. The output voltage of each op-amp corresponds to x, y, and z. The product terms $xy$ and $xz$ require two analog multipliers.
 
 I used an [AD633](https://www.analog.com/media/en/technical-documentation/data-sheets/ad633.pdf) rather than the MPY634 in the original schematic — it dropped in as a direct replacement with no modifications needed. For the op-amps, I used a single [TL084CN](https://www.ti.com/product/TL084/part-details/TL084CN) which contains 4 op-amps internally. The multipliers are the most expensive component in the build at around $11 each, but the rest of the circuit is just standard resistors, capacitors, and the quad op-amp. It's remarkable how few components it takes to continuously solve the Lorenz equations in real time.
 
