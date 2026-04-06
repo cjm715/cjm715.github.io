@@ -3,6 +3,9 @@ title: "6th Place in Kaggle Reverse Game of Life Competition"
 date: 2020-12-22
 category: Data
 excerpt: "Simulated annealing on GPU using PyTorch — running thousands of parallel Game of Life simulations at once, powered by convolutions originally designed for CNNs."
+thumbnail: "/assets/images/John_H_Conway_2005.jpeg"
+thumbnailAlt: "Portrait of mathematician John H. Conway"
+thumbnailPosition: "center top"
 ---
 
 This article explains my solution to the [Kaggle Competition: Reverse Game of Life 2020](https://www.kaggle.com/c/conways-reverse-game-of-life-2020). We'll cover the Game of Life itself, the competition problem, and then walk through the code — all available on [GitHub](https://github.com/cjm715/kaggle-game-of-life). The use of PyTorch for GPU computation was essential to the approach. It was fun using PyTorch for something other than neural networks.

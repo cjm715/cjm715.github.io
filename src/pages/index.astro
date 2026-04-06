@@ -44,13 +44,24 @@ function fmtDate(d: Date) {
       <div class="posts-grid">
         {posts.map(post => (
           <a href={`/posts/${post.slug}`} class="post-card">
-            <div class="post-card__meta">
-              <span class="post-card__category">{post.data.category}</span>
-              <span class="post-card__date">{fmtDate(post.data.date)}</span>
+            <div class="post-card__media">
+              <img
+                src={post.data.thumbnail}
+                alt={post.data.thumbnailAlt}
+                class="post-card__image"
+                style={post.data.thumbnailPosition ? `object-position: ${post.data.thumbnailPosition};` : undefined}
+                loading="lazy"
+              />
             </div>
-            <h3 class="post-card__title">{post.data.title}</h3>
-            <p class="post-card__excerpt">{post.data.excerpt}</p>
-            <span class="post-card__cta">Read →</span>
+            <div class="post-card__body">
+              <div class="post-card__meta">
+                <span class="post-card__category">{post.data.category}</span>
+                <span class="post-card__date">{fmtDate(post.data.date)}</span>
+              </div>
+              <h3 class="post-card__title">{post.data.title}</h3>
+              <p class="post-card__excerpt">{post.data.excerpt}</p>
+              <span class="post-card__cta">Read →</span>
+            </div>
           </a>
         ))}
       </div>

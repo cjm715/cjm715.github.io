@@ -3,6 +3,8 @@ title: "Training an Analog Neural Network Circuit"
 date: 2026-03-13
 category: Machine Learning
 excerpt: "A compact NumPy implementation of predictive-coding inference, exposing the mechanics of local error propagation and hidden-state dynamics — a reference design for analog hardware."
+thumbnail: "/assets/images/pcn-function-fit.png"
+thumbnailAlt: "Predictive coding network fit against the target function"
 ---
 
 This post is a write-up of the predictive coding network project in `pcn`. The current codebase is a compact NumPy implementation of predictive-coding-style inference and learning, applied to a toy regression problem: learning the mapping $y = \sin(3x)$ from samples on $[-1, 1]$.

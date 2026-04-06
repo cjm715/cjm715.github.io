@@ -3,6 +3,8 @@ title: "Can we construct an ODE that follows a prescribed limit cycle?"
 date: 2026-03-23
 category: Machine Learning
 excerpt: "Constructing an ODE that attaches to a prescribed curve — using flow-matching machinery to derive a marginal vector field that generates a limit cycle from pure noise."
+thumbnail: "/assets/images/flow-matching-loop3d-still.png"
+thumbnailAlt: "Learned trajectories converging onto a nonplanar 3D loop"
 ---
 
 <figure>
