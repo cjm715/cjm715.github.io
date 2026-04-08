@@ -44,13 +44,25 @@ function fmtDate(d: Date) {
       <div class="posts-grid">
         {posts.map(post => (
           <a href={`/posts/${post.slug}`} class="post-card">
-            <div class="post-card__meta">
-              <span class="post-card__category">{post.data.category}</span>
-              <span class="post-card__date">{fmtDate(post.data.date)}</span>
+            <div class="post-card__media">
+              <img
+                src={post.data.thumbnail}
+                alt={post.data.thumbnailAlt}
+                class="post-card__image"
+                style={post.data.thumbnailPosition ? `object-position: ${post.data.thumbnailPosition};` : undefined}
+                data-gif={post.data.thumbnailGif ?? undefined}
+                loading="lazy"
+              />
             </div>
-            <h3 class="post-card__title">{post.data.title}</h3>
-            <p class="post-card__excerpt">{post.data.excerpt}</p>
-            <span class="post-card__cta">Read →</span>
+            <div class="post-card__body">
+              <div class="post-card__meta">
+                <span class="post-card__category">{post.data.category}</span>
+                <span class="post-card__date">{fmtDate(post.data.date)}</span>
+              </div>
+              <h3 class="post-card__title">{post.data.title}</h3>
+              <p class="post-card__excerpt">{post.data.excerpt}</p>
+              <span class="post-card__cta">Read →</span>
+            </div>
           </a>
         ))}
       </div>
@@ -205,6 +217,16 @@ function fmtDate(d: Date) {
   <Footer />
 </BaseLayout>
 
+<!-- ── Hover-to-animate thumbnails ───────────────────────── -->
+<script>
+  document.querySelectorAll<HTMLImageElement>('img[data-gif]').forEach(img => {
+    const still = img.src;
+    const gif   = img.dataset.gif!;
+    img.addEventListener('mouseenter', () => { img.src = gif; });
+    img.addEventListener('mouseleave', () => { img.src = still; });
+  });
+</script>
+
 <!-- ── Lorenz Attractor Canvas ───────────────────────────── -->
 <script>
   const canvas = document.getElementById('lorenz-canvas') as HTMLCanvasElement;
@@ -222,7 +244,6 @@ function fmtDate(d: Date) {
   const TRAIL = 3500;
   const trail: [number, number, number][] = [];
   let angleZ = 0;
-  const TILT = 0.30;
 
   function rk4(dt: number) {
     const f = (x: number, y: number, z: number): [number, number, number] =>
@@ -247,7 +268,7 @@ function fmtDate(d: Date) {
     const rx =  px * cosA - py * sinA;
     const ry =  px * sinA + py * cosA;
     const rz = pz - 24;
-    return [cx + rx * scale, cy - (ry * Math.cos(TILT) - rz * Math.sin(TILT)) * scale];
+    return [cx + rx * scale, cy - rz * scale];
   }
 
   const STEPS = 4, DT = 0.007, BATCH = 30;

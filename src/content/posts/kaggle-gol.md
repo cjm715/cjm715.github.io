@@ -3,6 +3,9 @@ title: "6th Place in Kaggle Reverse Game of Life Competition"
 date: 2020-12-22
 category: Data
 excerpt: "Simulated annealing on GPU using PyTorch — running thousands of parallel Game of Life simulations at once, powered by convolutions originally designed for CNNs."
+thumbnail: "/assets/images/glider-static.png"
+thumbnailGif: "/assets/images/glider.gif"
+thumbnailAlt: "Game of Life glider pattern animation"
 ---
 
 This article explains my solution to the [Kaggle Competition: Reverse Game of Life 2020](https://www.kaggle.com/c/conways-reverse-game-of-life-2020). We'll cover the Game of Life itself, the competition problem, and then walk through the code — all available on [GitHub](https://github.com/cjm715/kaggle-game-of-life). The use of PyTorch for GPU computation was essential to the approach. It was fun using PyTorch for something other than neural networks.
@@ -26,6 +29,33 @@ The competition uses **periodic boundary conditions** — a cell at the edge see
 
 The Game of Life is ridiculously simple to define, yet produces interesting patterns that almost appear life-like. Certain patterns recur across initializations and have been named by the research community — two well-known ones are the *Glider* (a pattern that translates diagonally) and the *Blinker* (a pattern that oscillates).
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+<script src="/assets/js/game-of-life.js"></script>
+
+<div id='canvasDiv'></div>
+
+<sub>*Click anywhere to restart the game of life. This and all other Game of Life simulations in this post are modifications of the original ["Game of Life"](https://p5js.org/examples/simulate-game-of-life.html) p5.js example by [Daniel Shiffman](https://natureofcode.com/) licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).*</sub>
+
+## Example Patterns
+
+Here are two well-known stable patterns:
+
+<script src="/assets/js/glider.js"></script>
+
+<div id='gliderDiv' style="text-align: center;"></div>
+
+<sub>*Glider*</sub>
+
+<br/>
+
+<script src="/assets/js/blinker.js"></script>
+
+<div id='blinkerDiv' style="text-align: center;"></div>
+
+<sub>*Blinker*</sub>
+
+<br/>
+
 ## The Competition Problem
 
 Given only the *final state* of the game (on a 25×25 grid) and the number of time steps between the final and initial states, determine an initial state that when evolved forward closely matches the given final state.
@@ -33,6 +63,16 @@ Given only the *final state* of the game (on a 25×25 grid) and the number of ti
 The closeness between the predicted initial state's evolved stop state and the true stop state is measured by mean absolute error across cells. Note: even if we find a start state that evolves to the exact stop state, it may not match the true start state — multiple states can lead to the same state due to the nature of the Game of Life rules.
 
 The number of time steps $\delta$ varies from 1 to 5, with roughly 10,000 instances per delta — **50,000 total instances** to solve.
+
+For instance, suppose we have the following sequence of grid states appearing in the game of life:
+
+<script src="/assets/js/comp-desc.js"></script>
+
+<div id='compDescDiv'></div>
+
+<sub>*Click anywhere above to draw a new example.*</sub>
+
+<br/>
 
 ## Simulated Annealing
 

@@ -3,6 +3,9 @@ title: "Solving the Lorenz equations using an analog circuit"
 date: 2026-03-26
 category: Electronics
 excerpt: "Voltages as state variables, op-amp integrators for the linear terms, analog multipliers for the nonlinear products — the circuit continuously solves the Lorenz equations in real time."
+thumbnail: "/assets/images/lorenz-attractor-dho804-3d-rotate-still.png"
+thumbnailGif: "/assets/images/lorenz-attractor-dho804-3d-rotate.gif"
+thumbnailAlt: "Oscilloscope rendering of a Lorenz attractor"
 ---
 
 ## Theory
