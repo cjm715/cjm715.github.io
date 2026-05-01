@@ -306,3 +306,10 @@ function fmtDate(d: Date) {
 
   draw();
 </script>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.post-card').forEach(card => {
+    card.addEventListener('mouseenter', () => card.classList.add('is-hovered'));
+    card.addEventListener('mouseleave', () => card.classList.remove('is-hovered'));
+  });
+</script>

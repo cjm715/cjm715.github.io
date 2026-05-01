@@ -188,7 +188,8 @@ img, video { max-width: 100%; height: auto; display: block; }
   object-fit: cover;
   transition: transform var(--tr);
 }
-.post-card:hover .post-card__image { transform: scale(1.03); }
+.post-card:hover .post-card__image,
+.post-card.is-hovered .post-card__image { transform: scale(1.03); }
 .post-card__body {
   padding: 1.5rem 1.5rem 1.65rem;
   display: flex;
