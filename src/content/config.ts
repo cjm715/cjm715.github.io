@@ -10,6 +10,7 @@ const posts = defineCollection({
     thumbnail: z.string(),
     thumbnailAlt: z.string(),
     thumbnailPosition: z.string().optional(),
+    thumbnailGif: z.string().optional(),
   }),
 });
 

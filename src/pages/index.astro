@@ -46,6 +46,7 @@ function fmtDate(d: Date) {
                 alt={post.data.thumbnailAlt}
                 class="post-card__image"
                 style={post.data.thumbnailPosition ? `object-position: ${post.data.thumbnailPosition};` : undefined}
+                data-gif={post.data.thumbnailGif ?? undefined}
                 loading="lazy"
               />
             </div>
@@ -204,6 +205,16 @@ function fmtDate(d: Date) {
 
   <Footer />
 </BaseLayout>
+
+<!-- ── Hover-to-animate thumbnails ───────────────────────── -->
+<script>
+  document.querySelectorAll<HTMLImageElement>('img[data-gif]').forEach(img => {
+    const still = img.src;
+    const gif   = img.dataset.gif!;
+    img.addEventListener('mouseenter', () => { img.src = gif; });
+    img.addEventListener('mouseleave', () => { img.src = still; });
+  });
+</script>
 
 <!-- ── Lorenz Attractor Canvas ───────────────────────────── -->
 <script>
