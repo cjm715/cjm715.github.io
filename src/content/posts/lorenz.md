@@ -8,9 +8,15 @@ thumbnailGif: "/assets/images/lorenz-attractor-dho804-3d-rotate.gif"
 thumbnailAlt: "Oscilloscope rendering of a Lorenz attractor"
 ---
 
-## Theory
+## Introduction
 
-The Lorenz system is one of the classic examples of deterministic chaos. It originated from Edward Lorenz's simplified model of atmospheric convection and was pioneering work in the development of chaos theory. Small changes in the initial condition lead to very different long-term motion, even though the equations themselves are completely deterministic.
+Nonlinear dynamics and chaotic systems are sometimes governed by seemingly simple rules yet can have amazing rich dynamics. The Lorenz system is a classic example of such a system. It originated from Edward Lorenz's simplified model of atmospheric convection and was pioneering work in the development of chaos theory. It has always capitivated me and many others. 
+
+I recall at an APS (American Physical Society) conference during graduate school seeing an analog circuit that implemented the Lorenz system and I have always wanted to replicate that circuit ever since. I finally did. I'd like to share details about the build and design for others who want to build one for themselves. Other tutorials I found online didn't go into sufficient detail about how the circuit worked from equations to components. 
+
+Hopefully this will help others who want to understand it in depth as to why it works rather than just following a given circuit diagram and going off of faith. I hope the reader will take more from this article than just an understanding of the implementation for this system but a framework that generalizes and allows them to apply it to other differential equations of interests. If you interested in dynamical systems, analog computing and electonics, this is a really fun and simple build and it's so satifying to see the lorenz attractor come to life on an oscilloscope. 
+
+I learned a lot from this book: [A Concise Guide to Chaotic Electronic Circuits](https://link.springer.com/book/10.1007/978-3-319-05900-6) by Arturo Buscarino et al. I followed its methodology from systematically going from equation to circuit. The book does cover the Lorenz system and comes up with a circuit diagram. However I decided on a simplier cicuit design based off of Paul Horowitz at Harvard University discussed here in [this video](https://www.youtube.com/watch?v=DBteowmSN8g) and the associated [article](http://seti.harvard.edu/unusual_stuff/misc/lorenz.htm). My build differs with choices of resistor values (scaled by constant factor that doesn't impact implementation) based on the resistors I had on hand. Also, I used different mulitplier and op amp components but they are functionally the same.
 
 The Lorenz system is governed by this set of differential equations:
 
