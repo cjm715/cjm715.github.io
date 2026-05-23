@@ -33,6 +33,37 @@ $$\sigma = 10, \qquad \rho = 28, \qquad \beta = \frac{8}{3}.$$
 What makes this system especially interesting in hardware is that the equations map naturally onto analog computing blocks. Voltages represent the state variables $x(t)$, $y(t)$, and $z(t)$. Op-amp integrators and summing stages implement the linear pieces of the dynamics, while analog multipliers generate the nonlinear $xy$ and $xz$ terms. With the right scaling, the circuit continuously solves the differential equations in real time.
 
 
+## From dimensionless equations to voltages and seconds
+
+The Lorenz equations above are *dimensionless* — $x$, $y$, $z$, and $t$ are all pure numbers. To map them onto an analog circuit we need to give the state variables units of voltage and time units of seconds. We do this with simple linear changes of variable.
+
+Let $X$, $Y$, $Z$ (in volts) and $\tau$ (in seconds) be the dimension-full counterparts, related to the dimensionless variables by
+
+$$X = k_1\, x, \qquad Y = k_2\, y, \qquad Z = k_3\, z, \qquad t = \kappa\, \tau.$$
+
+Here $k_1$, $k_2$, $k_3$ are *voltage* scale factors and $\kappa$ is a *rate* with units of $1/\text{s}$. Equivalently $\tau = t/\kappa$: one unit of dimensionless time corresponds to $1/\kappa$ seconds of real time.
+
+For this build I take
+
+$$k_1 = k_2 = k_3 \equiv k = \tfrac{1}{10}\,\text{V}.$$
+
+With the standard parameters the dimensionless states stay roughly within $|x|, |y| \lesssim 30$ and $0 \lesssim z \lesssim 50$, so $|X|, |Y| \lesssim 3\,\text{V}$ and $0 \lesssim Z \lesssim 5\,\text{V}$ — comfortably inside the $\pm 12\,\text{V}$ supply rails of the op-amps and multipliers, with enough headroom to avoid clipping.
+
+Substituting $x = X/k$, $y = Y/k$, $z = Z/k$, and $t = \kappa \tau$ into the dimensionless equations and tidying up gives the dimension-full system:
+
+$$\frac{dX}{d\tau} = \kappa\, \sigma\, (Y - X)$$
+
+$$\frac{dY}{d\tau} = \kappa\, \rho\, X \;-\; \kappa\, Y \;-\; \frac{\kappa}{k}\, X Z$$
+
+$$\frac{dZ}{d\tau} = \frac{\kappa}{k}\, X Y \;-\; \kappa\, \beta\, Z.$$
+
+A quick units check: every term on the right-hand side works out to volts per second, as it must for the derivative of a voltage. The linear terms carry one factor of $\kappa$ (with units $1/\text{s}$), and the bilinear terms carry $\kappa/k$ which has units of $(1/\text{s})\cdot(1/\text{V})$ — exactly what is needed for a product like $XY$ or $XZ$ (volts²) to come out in volts per second.
+
+Two separate design choices live in these equations:
+
+- **$\kappa$ sets the speed.** It will be set by the integrator time constant in the next section. Smaller $\kappa$ slows the attractor down; larger $\kappa$ speeds it up. Choosing $\kappa$ in the range of $10$–$1000\,\text{s}^{-1}$ produces an attractor that evolves on a millisecond-to-tenths-of-a-second timescale — slow enough to watch unfold on a scope, fast enough to look continuous.
+- **$k$ sets the amplitude.** The choice $k = \tfrac{1}{10}\,\text{V}$ keeps the state voltages in the few-volt range, well within rail. It also has a happy interaction with the AD633 analog multiplier (which has its own built-in $10\,\text{V}$ scale factor in the denominator of its transfer function); we will see how that plays out when we wire up the product terms.
+
 ## The Build
 
 My build is based off of the design discussed in [this video](https://www.youtube.com/watch?v=DBteowmSN8g) and the associated [article](http://seti.harvard.edu/unusual_stuff/misc/lorenz.htm) by Paul Horowitz at Harvard University. 
