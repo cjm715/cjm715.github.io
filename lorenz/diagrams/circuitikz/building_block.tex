@@ -1,0 +1,54 @@
+\documentclass[border=4pt]{standalone}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\ctikzset{
+  amplifiers/fill=white,
+  resistors/scale=0.9,
+  capacitors/scale=0.9,
+}
+
+\begin{document}
+\begin{circuitikz}[american, scale=1.0, transform shape]
+
+  % Op-amp with inverting (-) input on TOP via `mirror`.
+  \node [op amp] (OA) at (0,0) {};
+  \node at (OA.center) [font=\scriptsize] {$A_{\mathrm{OL}}\!\to\!\infty$};
+
+  % Summing junction (just left of the inverting input).
+  \coordinate (sumj) at ($(OA.-)+(-1.2,0)$);
+
+  % Non-inverting input to ground.
+  \draw (OA.+) -- ++(-0.6,0) node[ground]{};
+
+  % Wire from inverting input to the summing junction.
+  \draw (OA.-) -- (sumj);
+  \node[circ] at (sumj) {};
+
+  % Vertical bus extending up and down from the junction.
+  \coordinate (busTop) at ($(sumj)+(0,2.0)$);
+  \coordinate (busBot) at ($(sumj)+(0,-2.0)$);
+  \draw (busTop) -- (busBot);
+
+  % Three input branches.
+  \draw (busTop) to[R, l=$R_1$, *-o] ++(-3.0,0) node[left] {$V_1$};
+  \draw (sumj)   to[R, l=$R_2$, -o] ++(-3.0,0) node[left] {$V_2$};
+  \draw (busBot) to[R, l=$R_N$, *-o] ++(-3.0,0) node[left] {$V_N$};
+
+  % Vertical ellipsis between R_2 and R_N.
+  \node at ($(sumj)+(-1.5,-1.0)$) {$\vdots$};
+
+  % Feedback capacitor wrapping over the top.
+  % Top-left corner of the loop sits above the summing junction;
+  % top-right corner sits above the op-amp output.
+  \coordinate (outR)         at ($(OA.out)+(0.6,0)$);
+  \coordinate (fbTopLeft)    at ($(busTop)+(0,1.0)$);
+  \coordinate (fbTopRight)   at (fbTopLeft -| outR);
+  \draw (OA.out) -- (outR) -- (fbTopRight);
+  \draw (fbTopRight) to[C, l=$C$] (fbTopLeft);
+  \draw (fbTopLeft) -- (busTop);
+
+  % Output wire.
+  \draw (outR) -- ++(1.8,0) node[circ]{} node[right] {$V_{\mathrm{out}}$};
+
+\end{circuitikz}
+\end{document}

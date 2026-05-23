@@ -1,0 +1,50 @@
+\documentclass[border=4pt]{standalone}
+\input{lorenz_style.tex}
+
+\begin{document}
+\begin{circuitikz}[american]
+
+  % AD633 as a labeled rectangle with named pin coordinates.
+  \def\chw{2.6}   % chip width
+  \def\chh{3.2}   % chip height
+  \coordinate (chipNW) at (0,\chh);
+  \coordinate (chipSE) at (\chw,0);
+  \draw[thick] (0,0) rectangle (\chw,\chh);
+  \node at ($(chipNW)!0.5!(chipSE)$) [font=\bfseries\small] {AD633};
+  \node at ($(chipNW)!0.5!(chipSE)+(0,-0.6)$) [font=\scriptsize]
+      {$W = \dfrac{(X_1-X_2)(Y_1-Y_2)}{10\,\mathrm{V}}$};
+
+  % Input pin coordinates (left edge).
+  \coordinate (X1) at (0, \chh-0.4);
+  \coordinate (X2) at (0, \chh-1.0);
+  \coordinate (Y1) at (0, \chh-1.8);
+  \coordinate (Y2) at (0, \chh-2.4);
+  \coordinate (Zin) at (0, \chh-3.0);
+
+  % Pin labels just inside the chip.
+  \node at ($(X1)+(0.25,0)$)  [right, font=\scriptsize] {$X_1$};
+  \node at ($(X2)+(0.25,0)$)  [right, font=\scriptsize] {$X_2$};
+  \node at ($(Y1)+(0.25,0)$)  [right, font=\scriptsize] {$Y_1$};
+  \node at ($(Y2)+(0.25,0)$)  [right, font=\scriptsize] {$Y_2$};
+  \node at ($(Zin)+(0.25,0)$) [right, font=\scriptsize] {$Z$};
+
+  % Output pin (right edge).
+  \coordinate (W) at (\chw, \chh-1.5);
+  \node at ($(W)+(-0.25,0)$) [left, font=\scriptsize] {$W$};
+
+  % Wiring to produce W = -XZ/10V:
+  %   X1 = X, X2 = ground   (so X1-X2 = X)
+  %   Y1 = ground, Y2 = Z   (so Y1-Y2 = -Z)
+  %   Zin grounded
+  %   --> W = X * (-Z) / 10V = -XZ/10V
+  \draw (X1) -- ++(-1.6,0) node[circ]{} node[left] {$X$};
+  \draw (X2) -- ++(-0.8,0) node[ground, rotate=-90, yshift=-0.05cm]{};
+  \draw (Y1) -- ++(-0.8,0) node[ground, rotate=-90, yshift=-0.05cm]{};
+  \draw (Y2) -- ++(-1.6,0) node[circ]{} node[left] {$Z$};
+  \draw (Zin) -- ++(-0.8,0) node[ground, rotate=-90, yshift=-0.05cm]{};
+
+  % Output wire.
+  \draw (W) -- ++(1.6,0) node[circ]{} node[right] {$-\dfrac{XZ}{10\,\mathrm{V}}$};
+
+\end{circuitikz}
+\end{document}

@@ -1,0 +1,34 @@
+\documentclass[border=4pt]{standalone}
+\input{lorenz_style.tex}
+
+\begin{document}
+\begin{circuitikz}[american]
+
+  \node [op amp] (OA) at (0,0) {};
+  \node at (OA.center) [font=\scriptsize] {$\dot Z$};
+
+  \coordinate (sumj) at ($(OA.-)+(-1.2,0)$);
+
+  \draw (OA.+) -- ++(-0.6,0) node[ground]{};
+  \draw (OA.-) -- (sumj);
+  \node[circ] at (sumj) {};
+
+  % Two input branches: -XY/10V on top, Z (self-decay) on bottom.
+  \coordinate (busTop) at ($(sumj)+(0, 1.2)$);
+  \coordinate (busBot) at ($(sumj)+(0,-1.2)$);
+  \draw (busTop) -- (busBot);
+
+  \draw (busTop) to[R, l=$R_6 = 1\,\mathrm{k}\Omega$,    *-o] ++(-4.0,0) node[left] {$-\dfrac{XY}{10\,\mathrm{V}}$};
+  \draw (busBot) to[R, l=$R_7 = 37.5\,\mathrm{k}\Omega$, *-o] ++(-4.0,0) node[left] {$Z$};
+
+  \coordinate (outR)         at ($(OA.out)+(0.6,0)$);
+  \coordinate (fbTopLeft)    at ($(busTop)+(0,1.0)$);
+  \coordinate (fbTopRight)   at (fbTopLeft -| outR);
+  \draw (OA.out) -- (outR) -- (fbTopRight);
+  \draw (fbTopRight) to[C, l=$C$] (fbTopLeft);
+  \draw (fbTopLeft) -- (busTop);
+
+  \draw (outR) -- ++(1.8,0) node[circ]{} node[right] {$Z$};
+
+\end{circuitikz}
+\end{document}

@@ -1,0 +1,40 @@
+\documentclass[border=4pt]{standalone}
+\input{lorenz_style.tex}
+
+\begin{document}
+\begin{circuitikz}[american]
+
+  \node [op amp] (OA) at (0,0) {};
+  \node at (OA.center) [font=\scriptsize] {$\dot X$};
+
+  \coordinate (sumj) at ($(OA.-)+(-1.2,0)$);
+
+  % Non-inverting input to ground.
+  \draw (OA.+) -- ++(-0.6,0) node[ground]{};
+
+  % Wire from inverting input to the summing junction.
+  \draw (OA.-) -- (sumj);
+  \node[circ] at (sumj) {};
+
+  % Vertical bus, two branches: -Y on top, X on bottom (self-feedback).
+  \coordinate (busTop) at ($(sumj)+(0, 1.2)$);
+  \coordinate (busBot) at ($(sumj)+(0,-1.2)$);
+  \draw (busTop) -- (busBot);
+
+  % Input branches with concrete resistor values.
+  \draw (busTop) to[R, l=$R_1 = 10\,\mathrm{k}\Omega$, *-o] ++(-3.6,0) node[left] {$-Y$};
+  \draw (busBot) to[R, l=$R_2 = 10\,\mathrm{k}\Omega$, *-o] ++(-3.6,0) node[left] {$X$};
+
+  % Feedback capacitor over the top.
+  \coordinate (outR)         at ($(OA.out)+(0.6,0)$);
+  \coordinate (fbTopLeft)    at ($(busTop)+(0,1.0)$);
+  \coordinate (fbTopRight)   at (fbTopLeft -| outR);
+  \draw (OA.out) -- (outR) -- (fbTopRight);
+  \draw (fbTopRight) to[C, l=$C$] (fbTopLeft);
+  \draw (fbTopLeft) -- (busTop);
+
+  % Output wire.
+  \draw (outR) -- ++(1.8,0) node[circ]{} node[right] {$X$};
+
+\end{circuitikz}
+\end{document}
