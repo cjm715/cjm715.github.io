@@ -18,8 +18,8 @@
   \coordinate (busBot) at ($(sumj)+(0,-1.2)$);
   \draw (busTop) -- (busBot);
 
-  \draw (busTop) to[R, l=$R_6 = 1\,\mathrm{k}\Omega$,    *-o] ++(-4.0,0) node[left] {$-\dfrac{XY}{10\,\mathrm{V}}$};
-  \draw (busBot) to[R, l=$R_7 = 37.5\,\mathrm{k}\Omega$, *-o] ++(-4.0,0) node[left] {$Z$};
+  \draw (busTop) to[R, l={$R_6 = 1\,\mathrm{k}\Omega$},    *-o] ++(-4.0,0) node[left] {$-\dfrac{XY}{10\,\mathrm{V}}$};
+  \draw (busBot) to[R, l={$R_7 = 37.5\,\mathrm{k}\Omega$}, *-o] ++(-4.0,0) node[left] {$Z$};
 
   \coordinate (outR)         at ($(OA.out)+(0.6,0)$);
   \coordinate (fbTopLeft)    at ($(busTop)+(0,1.0)$);

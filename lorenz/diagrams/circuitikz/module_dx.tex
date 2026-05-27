@@ -22,8 +22,8 @@
   \draw (busTop) -- (busBot);
 
   % Input branches with concrete resistor values.
-  \draw (busTop) to[R, l=$R_1 = 10\,\mathrm{k}\Omega$, *-o] ++(-3.6,0) node[left] {$-Y$};
-  \draw (busBot) to[R, l=$R_2 = 10\,\mathrm{k}\Omega$, *-o] ++(-3.6,0) node[left] {$X$};
+  \draw (busTop) to[R, l={$R_1 = 10\,\mathrm{k}\Omega$}, *-o] ++(-3.6,0) node[left] {$-Y$};
+  \draw (busBot) to[R, l={$R_2 = 10\,\mathrm{k}\Omega$}, *-o] ++(-3.6,0) node[left] {$X$};
 
   % Feedback capacitor over the top.
   \coordinate (outR)         at ($(OA.out)+(0.6,0)$);

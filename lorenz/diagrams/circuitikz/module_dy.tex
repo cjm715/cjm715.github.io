@@ -19,9 +19,9 @@
   \coordinate (busBot) at ($(sumj)+(0,-2.2)$);
   \draw (busTop) -- (busBot);
 
-  \draw (busTop) to[R, l=$R_3 = 3.57\,\mathrm{k}\Omega$, *-o] ++(-4.0,0) node[left] {$X$};
-  \draw (busMid) to[R, l=$R_4 = 1\,\mathrm{k}\Omega$,    -o] ++(-4.0,0) node[left] {$-\dfrac{XZ}{10\,\mathrm{V}}$};
-  \draw (busBot) to[R, l=$R_5 = 100\,\mathrm{k}\Omega$, *-o] ++(-4.0,0) node[left] {$-Y$};
+  \draw (busTop) to[R, l={$R_3 = 3.57\,\mathrm{k}\Omega$}, *-o] ++(-4.0,0) node[left] {$X$};
+  \draw (busMid) to[R, l={$R_4 = 1\,\mathrm{k}\Omega$},    -o] ++(-4.0,0) node[left] {$-\dfrac{XZ}{10\,\mathrm{V}}$};
+  \draw (busBot) to[R, l={$R_5 = 100\,\mathrm{k}\Omega$}, *-o] ++(-4.0,0) node[left] {$-Y$};
 
   \coordinate (outR)         at ($(OA.out)+(0.6,0)$);
   \coordinate (fbTopLeft)    at ($(busTop)+(0,1.0)$);
