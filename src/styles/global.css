@@ -397,6 +397,32 @@ hr.divider { border: none; border-top: 1px solid var(--border); }
   font-style: italic;
   line-height: 1.55;
 }
+/* Line-art diagrams (black strokes) need a light backing on the dark theme */
+.post-content figure img.diagram {
+  background: #fff;
+  padding: 1.25rem 1.5rem;
+}
+
+/* Tables */
+.post-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 1.75rem;
+  font-size: 0.95rem;
+}
+.post-content th,
+.post-content td {
+  border: 1px solid var(--border);
+  padding: 0.6rem 0.9rem;
+  text-align: left;
+  vertical-align: middle;
+}
+.post-content thead th {
+  background: var(--surface-2);
+  font-weight: 600;
+  color: var(--ink);
+}
+.post-content tbody tr:nth-child(even) { background: var(--surface); }
 
 /* Shiki code blocks */
 .post-content pre.astro-code {

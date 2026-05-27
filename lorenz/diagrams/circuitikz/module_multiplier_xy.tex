@@ -32,19 +32,19 @@
   \coordinate (W) at (\chw, \chh-1.5);
   \node at ($(W)+(-0.25,0)$) [left, font=\scriptsize] {$W$};
 
-  % Wiring to produce W = -XZ/10V:
+  % Wiring to produce W = -XY/10V (the Y stage supplies -Y):
   %   X1 = X, X2 = ground   (so X1-X2 = X)
-  %   Y1 = ground, Y2 = Z   (so Y1-Y2 = -Z)
+  %   Y1 = -Y, Y2 = ground  (so Y1-Y2 = -Y)
   %   B (summing input) grounded, so B = 0
-  %   --> W = X * (-Z) / 10V + 0 = -XZ/10V
+  %   --> W = X * (-Y) / 10V + 0 = -XY/10V
   \draw (X1) -- ++(-1.6,0) node[circ]{} node[left] {$X$};
   \draw (X2) -- ++(-0.8,0) node[ground, rotate=-90, yshift=-0.05cm]{};
-  \draw (Y1) -- ++(-0.8,0) node[ground, rotate=-90, yshift=-0.05cm]{};
-  \draw (Y2) -- ++(-1.6,0) node[circ]{} node[left] {$Z$};
+  \draw (Y1) -- ++(-1.6,0) node[circ]{} node[left] {$-Y$};
+  \draw (Y2) -- ++(-0.8,0) node[ground, rotate=-90, yshift=-0.05cm]{};
   \draw (Bin) -- ++(-0.8,0) node[ground, rotate=-90, yshift=-0.05cm]{};
 
   % Output wire.
-  \draw (W) -- ++(1.6,0) node[circ]{} node[right] {$-\dfrac{XZ}{10\,\mathrm{V}}$};
+  \draw (W) -- ++(1.6,0) node[circ]{} node[right] {$-\dfrac{XY}{10\,\mathrm{V}}$};
 
 \end{circuitikz}
 \end{document}
