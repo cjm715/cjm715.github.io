@@ -10,9 +10,9 @@ thumbnailAlt: "Oscilloscope rendering of a Lorenz attractor"
 
 ## Introduction
 
-Nonlinear dynamics and chaotic systems are sometimes governed by seemingly simple rules yet can have amazingly rich dynamics. The Lorenz system is a classic example. It originated from Edward Lorenz's simplified model of atmospheric convection and was pioneering work in the development of chaos theory. It has always captivated me and many others.
+Nonlinear and chaotic systems are often governed by seemingly simple rules, yet produce astonishingly rich behavior. The Lorenz system is a classic example. It originated from Edward Lorenz's simplified model of atmospheric convection and was pioneering work in the development of chaos theory. It has always captivated me and many others.
 
-I recall at an APS (American Physical Society) conference during graduate school seeing an analog circuit that implemented the Lorenz system, and I have always wanted to replicate it ever since. I finally did. I'd like to share details about the build and design for others who want to build one for themselves. Other tutorials I found online didn't go into sufficient detail about how the circuit worked, from equations to components.
+I recall seeing an analog circuit that implemented the Lorenz system at an APS conference some years back, and I have always wanted to replicate it ever since. I finally did. I'd like to share details about the build and design for others who want to build one for themselves. Other tutorials I found online didn't go into sufficient detail about how the circuit worked, from equations to components.
 
 Hopefully this will help others who want to understand in depth why it works, rather than just following a given circuit diagram on faith. I hope the reader will take away from this article not just an understanding of this particular implementation, but a framework that generalizes and allows them to apply it to other differential equations of interest. If you're interested in dynamical systems, analog computing, and electronics, this is a really fun and simple build, and it's so satisfying to see the Lorenz attractor come to life on an oscilloscope.
 
@@ -35,7 +35,7 @@ What makes this system especially interesting in hardware is that the equations 
 
 ## From dimensionless equations to voltages and seconds
 
-The Lorenz equations above are *dimensionless* — $x$, $y$, $z$, and $t$ are all pure numbers. To map them onto an analog circuit we need to give the state variables units of voltage and time units of seconds. We do this with simple linear changes of variable.
+The Lorenz equations above are *dimensionless* — $x$, $y$, $z$, and $t$ are all pure numbers. To map them onto an analog circuit we need to give the state variables units of voltage and time units of seconds. We do this with the following change of variables.
 
 Let $X$, $Y$, $Z$ (in volts) and $\tau$ (in seconds) be the dimensionful counterparts, related to the dimensionless variables by
 
@@ -136,7 +136,7 @@ Notice the pattern: every resistor came out as $R_0$ divided by a Lorenz coeffic
 
 ## The multipliers
 
-Each product term comes from an AD633 analog multiplier. Its transfer function is $W = (X_1 - X_2)(Y_1 - Y_2)/(10\,\text{V}) + B$, where $B$ is a *summing* input added straight to the output — grounding it ($B = 0$) leaves a clean scaled product. Choosing which difference input carries the negative sign, one multiplier forms $-XZ/10\,\text{V}$ for the $Y$ stage and a second forms $-XY/10\,\text{V}$ for the $Z$ stage:
+Each product term comes from an AD633 analog multiplier. The AD633 computes the following in an analog fashion: $W = (X_1 - X_2)(Y_1 - Y_2)/(10\,\text{V}) + B$, where $B$ is a *summing* input added straight to the output — grounding it ($B = 0$) leaves a clean scaled product. Choosing which difference input carries the negative sign, one multiplier forms $-XZ/10\,\text{V}$ for the $Y$ stage and a second forms $-XY/10\,\text{V}$ for the $Z$ stage:
 
 <figure>
 <img class="diagram" src="/assets/images/lorenz-module-multiplier.svg" alt="AD633 multiplier with X on X1, Z on Y2, and X2, Y1, B grounded, outputting minus XZ over 10 volts" style="max-width: 480px;" />
@@ -164,7 +164,7 @@ Because each stage outputs the sign its consumers need, no separate inverting am
 
 The whole thing is a short parts list. The two product terms run through a pair of [AD633](https://www.analog.com/media/en/technical-documentation/data-sheets/ad633.pdf) analog multipliers, and the three integrators share a single [TL084CN](https://www.ti.com/product/TL084/part-details/TL084CN), a quad op-amp. The multipliers are the most expensive component at around \$18 each; everything else is standard resistors, capacitors, and that one op-amp chip. It's remarkable how few components it takes to continuously solve the Lorenz equations in real time.
 
-For power, I used two 12V DC adapters with their negative and positive terminals connected together to form a common ground, giving the three voltage levels needed for the op-amp and multiplier rails: −12V, 0V, and +12V.
+For power, I used two 12V DC adapters wired in series: I connected the negative terminal of one adapter to the positive terminal of the other, and that junction becomes the common ground (0V). This gives the three voltage levels needed for the op-amp and multiplier rails — the free positive terminal sits at +12V and the free negative terminal at −12V relative to that ground.
 
 <figure>
 <img src="/assets/images/lorenz-attractor-breadboard.jpg" alt="Breadboard analog circuit implementing the Lorenz equations" style="max-width: 720px;" />
