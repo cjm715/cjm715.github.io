@@ -20,7 +20,7 @@ function fmtDate(d: Date) {
     <div class="hero__overlay"></div>
     <div class="container">
       <div class="hero__content">
-        <p class="hero__eyebrow">Applied Mathematician &nbsp;·&nbsp; Numerical Methods &nbsp;·&nbsp; AI Silicon</p>
+        <p class="hero__eyebrow">Applied mathematician working on AI compute</p>
         <h1 class="hero__name">Chris<br>Miles</h1>
         <div class="hero__links">
           <a href="#writing" class="btn btn--primary">Writing</a>
@@ -35,7 +35,6 @@ function fmtDate(d: Date) {
     <div class="container">
       <div class="section__header">
         <p class="section__kicker">Writing</p>
-        <h2 class="section__title">Posts on AI compute, physics, and math</h2>
       </div>
       <div class="posts-grid">
         {posts.map(post => (
@@ -61,6 +60,60 @@ function fmtDate(d: Date) {
             </div>
           </a>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ── About ──────────────────────────────────────────────── -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__kicker">About</p>
+        <h2 class="section__title">Background</h2>
+      </div>
+      <div class="about-grid">
+
+        <div class="about-text">
+          <p>
+            I'm an <strong>applied mathematician</strong> working in numerics and AI compute, with roots in dynamical systems.
+          </p>
+          <p>
+            My academic training was in nonlinear dynamics — PhD in physics and MS in applied math at the University of Michigan. My thesis applied PDE-constrained optimal control to fluid mixing, using spectral and finite-difference solvers built from scratch. In addition, I worked on other fluid dynamics problems in active matter and acoustic droplet vaporization.
+          </p>
+          <p>
+            Out of graduate school I spent two years as a data scientist and machine learning engineer at a fintech startup, building a suite of time-series forecasting models — ARIMA-like models, Markov-chain models, and time-delay embedding methods from nonlinear dynamics.
+          </p>
+          <p>
+            Since 2021 I've been at Quadric, a custom AI inference processor startup, as the in-house numerics lead. I've implemented floating-point hardware units in Verilog, built company-wide numerical testing methodology, developed fixed-point validation tooling and ONNX-to-silicon error tracing, led the first Ax=b solvers on the chip, and developed numerically stable algorithms for neural network ops.
+          </p>
+          <div class="social-links">
+            <a href="https://github.com/cjm715" target="_blank" rel="noopener" class="social-link">GitHub</a>
+            <a href="https://www.linkedin.com/in/chris-john-miles/" target="_blank" rel="noopener" class="social-link">LinkedIn</a>
+            <a href="https://scholar.google.com/citations?user=nLpWYR8AAAAJ" target="_blank" rel="noopener" class="social-link">Google Scholar</a>
+            <a href="https://www.kaggle.com/cmiles715" target="_blank" rel="noopener" class="social-link">Kaggle</a>
+          </div>
+        </div>
+
+        <div class="about-credentials">
+          <div class="credential">
+            <p class="credential__school">MIT</p>
+            <p class="credential__degree">B.S. in Physics</p>
+            <p class="credential__year">Cambridge, MA</p>
+          </div>
+          <div class="credential">
+            <p class="credential__school">University of Michigan</p>
+            <p class="credential__degree">M.S. in Applied Mathematics</p>
+            <p class="credential__year">Ann Arbor, MI</p>
+          </div>
+          <div class="credential">
+            <p class="credential__school">University of Michigan</p>
+            <p class="credential__degree">Ph.D. in Physics</p>
+            <p class="credential__year">Ann Arbor, MI · 2018</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -146,60 +199,6 @@ function fmtDate(d: Date) {
       <p class="scholar-note">
         Full citation record on <a href="https://scholar.google.com/citations?user=nLpWYR8AAAAJ" target="_blank" rel="noopener">Google Scholar</a>.
       </p>
-    </div>
-  </section>
-
-  <hr class="divider" />
-
-  <!-- ── About ──────────────────────────────────────────────── -->
-  <section class="section" id="about">
-    <div class="container">
-      <div class="section__header">
-        <p class="section__kicker">About</p>
-        <h2 class="section__title">Background</h2>
-      </div>
-      <div class="about-grid">
-
-        <div class="about-text">
-          <p>
-            I'm an <strong>applied mathematician</strong> working across dynamical systems, numerics, and AI compute.
-          </p>
-          <p>
-            My academic training was in nonlinear dynamics — PhD in physics and MS in applied math at the University of Michigan. My thesis applied PDE-constrained optimal control to fluid mixing, using spectral and finite-difference solvers built from scratch. In addition, I worked on other fluid dynamics problems in active matter and acoustic droplet vaporization.
-          </p>
-          <p>
-            Out of graduate school I spent two years as a data scientist and machine learning engineer at a fintech startup, building a suite of time-series forecasting models — ARIMA-like models, Markov-chain models, and time-delay embedding methods from nonlinear dynamics.
-          </p>
-          <p>
-            Since 2021 I've been at Quadric, a custom AI inference processor startup, as the in-house numerics lead. I've implemented floating-point hardware units in Verilog, built company-wide numerical testing methodology, developed fixed-point validation tooling and ONNX-to-silicon error tracing, led the first Ax=b solvers on the chip, and developed numerically stable algorithms for neural network ops.
-          </p>
-          <div class="social-links">
-            <a href="https://github.com/cjm715" target="_blank" rel="noopener" class="social-link">GitHub</a>
-            <a href="https://www.linkedin.com/in/chris-john-miles/" target="_blank" rel="noopener" class="social-link">LinkedIn</a>
-            <a href="https://scholar.google.com/citations?user=nLpWYR8AAAAJ" target="_blank" rel="noopener" class="social-link">Google Scholar</a>
-            <a href="https://www.kaggle.com/cmiles715" target="_blank" rel="noopener" class="social-link">Kaggle</a>
-          </div>
-        </div>
-
-        <div class="about-credentials">
-          <div class="credential">
-            <p class="credential__school">MIT</p>
-            <p class="credential__degree">B.S. in Physics</p>
-            <p class="credential__year">Cambridge, MA</p>
-          </div>
-          <div class="credential">
-            <p class="credential__school">University of Michigan</p>
-            <p class="credential__degree">M.S. in Applied Mathematics</p>
-            <p class="credential__year">Ann Arbor, MI</p>
-          </div>
-          <div class="credential">
-            <p class="credential__school">University of Michigan</p>
-            <p class="credential__degree">Ph.D. in Physics</p>
-            <p class="credential__year">Ann Arbor, MI · 2018</p>
-          </div>
-        </div>
-
-      </div>
     </div>
   </section>
 
