@@ -397,6 +397,8 @@ hr.divider { border: none; border-top: 1px solid var(--border); }
   font-style: italic;
   line-height: 1.55;
 }
+/* Captions authored as markdown (to allow $math$) get wrapped in <p>; strip its margin */
+.post-content figcaption p { margin: 0; }
 /* Line-art diagrams (black strokes) need a light backing on the dark theme */
 .post-content figure img.diagram {
   background: #fff;
