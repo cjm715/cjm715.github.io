@@ -21,7 +21,7 @@ A few months back I came across [an article from Unconventional AI](https://www.
 
 I got curious whether I could take the idea further. If such an ODE can be constructed, could I also realize it as an analog circuit, the way I did [previously for the Lorenz system](/posts/lorenz)? And how would I make sure it could be built from only a few components? If we arrive at a limit cycle that is stable, this fights the unavoidable noise problems in analog computing circuits. These circuit questions are a teaser and I'll leave the circuit build as a potential follow-up.
 
-This post is a record of my attempt at the first goal: constructing an ODE with a given limit cycle. For simplicity I will consider a smooth, periodic parametrized curve $\gamma(\theta)$ with no self-intersections, so that every point in space has a well-defined nearest point on the curve.
+This post is a record of my attempt at the first goal: constructing an ODE with a given limit cycle. For simplicity I will consider a smooth, periodic parametrized curve $\gamma(\theta)$ with no self-intersections.
 
 Recently, I've had fun learning the theory behind flow matching and diffusion models from this [online MIT course](https://diffusion.csail.mit.edu/2026/index.html), and it felt like the right framework for this problem. The gist of flow matching is to decide how you want a probability distribution to transform over time, and then determine the flow field that accomplishes it. What I do here is nearly identical to that standard construction, adapted to the problem at hand.
 
