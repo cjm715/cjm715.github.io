@@ -208,21 +208,21 @@ This is the autonomous ODE I set out to construct. The follow-the-curve guarante
 
 ### Orbital Stability: A Stable Limit Cycle in the Tube
 
-Let $\Gamma = \{\gamma(\theta)\}$ denote the curve itself, and take
+Here is a short argument, at the same physics level as the rest of this post, that the curve is a stable limit cycle of $u_\infty$. Track half the squared distance to the curve $\Gamma$ along a trajectory:
 
-$$V(x) = \tfrac{1}{2}\,\mathrm{dist}(x, \Gamma)^2 = \tfrac{1}{2}\min_\theta \lVert x - \gamma(\theta)\rVert^2,$$
+$$V(x) = \tfrac{1}{2}\,\mathrm{dist}(x, \Gamma)^2.$$
 
-a minimum of smooth functions of $x$, one for each phase $\theta$. The condition that makes its gradient clean is uniqueness of the nearest point. Wherever $x$ has a single nearest point $\pi(x) = \gamma(\theta_x)$, meaning $x$ lies off the medial axis (the points tied between two or more parts of the curve), the envelope theorem gives
+Stay in a thin tube around the curve, close enough that the nearest point $\pi(x) = \gamma(\theta_x)$ is unique. Two geometric facts do all the work there. The gradient of $V$ is the vector from the nearest point back to $x$,
 
 $$\nabla V(x) = x - \pi(x),$$
 
-the vector pointing from the nearest point back to $x$. Where the nearest point is not unique this fails: on the medial axis the terms tie, $V$ has a crease, no single gradient exists, and $u_\infty$ is itself discontinuous. Inside any tube thinner than the curve's reach (its distance to the medial axis) uniqueness holds everywhere at once and $\pi(x), \theta_x$ vary smoothly, so we can differentiate $V$ along a trajectory. There the optimality of $\theta_x$ gives $\langle x - \pi(x),\, \gamma'(\theta_x)\rangle = 0$, the vector to the nearest point is orthogonal to the tangent, and so
+and that vector is perpendicular to the tangent $\gamma'(\theta_x)$ — if it weren't, sliding the foot of the segment along the curve would find a closer point. Now differentiate $V$ along a trajectory: the perpendicularity kills the tangential term, and the normal term hands back $V$ itself:
 
 $$\dot{V} \;=\; \Bigl\langle x - \pi(x),\; -\tfrac{1}{\tau}\bigl(x - \pi(x)\bigr) + \omega\,\gamma'(\theta_x) \Bigr\rangle \;=\; -\tfrac{2}{\tau}\,V.$$
 
-So inside the tube, distance to the curve decays exponentially. Two facts follow. On the curve the normal term vanishes, so the curve is a periodic orbit of $u_\infty$; and the Lyapunov identity makes a tube around it attracting and forward-invariant. A periodic orbit with an attracting neighborhood is a **stable limit cycle**.
+This is an exact identity, not a bound: inside the tube, distance to the curve decays as $e^{-t/\tau}$, everywhere at the same rate. Notice how the two-piece structure splits the labor — the normal term does all the stabilizing, while the tangential term only sets the speed of traffic around the loop. And since the normal term vanishes on the curve itself, the curve is a periodic orbit. A periodic orbit whose neighborhood drains onto it exponentially is a **stable limit cycle**.
 
-What remains empirical is the *global* picture. Starting from noise, far from the curve, do trajectories converge? This is not proven (maybe the reader can try!). I'm content for now just trying it out in simulation.
+The argument is local by construction: it lives in the tube where the nearest point is unique, and says nothing at points tied between two parts of the curve, where $u_\infty$ is discontinuous. Starting from noise, far away, do trajectories converge? That *global* question is not proven (maybe the reader can try!). I'm content for now just trying it out in simulation.
 
 ### Simulating the Autonomous Field
 
