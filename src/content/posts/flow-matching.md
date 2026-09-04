@@ -1,7 +1,7 @@
 ---
 title: "Can we construct an ODE that follows a prescribed limit cycle?"
 date: 2026-07-27
-category: Machine Learning
+category: Dynamical Systems
 excerpt: "Constructing an ODE that attaches to a prescribed curve, using flow-matching machinery to derive a marginal vector field that generates a limit cycle from pure noise."
 thumbnail: "/assets/images/flow-matching-trefoil3d-uinf-learned-still.png"
 thumbnailGif: "/assets/images/flow-matching-trefoil3d-uinf-learned-t20.gif"
