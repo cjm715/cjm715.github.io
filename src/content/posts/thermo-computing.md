@@ -16,7 +16,7 @@ Here I dive into the world of thermodynamic computing realized on a field progra
 
 First, I want to introduce these possibly foreign concepts to the reader who may have stumbled upon this page. What is an FPAA exactly? What is thermodynamic computing?
 
-An FPAA is the analog version of its cousin the FPGA, the field programmable gate array, which is aimed at digital design. An FPAA allows for prototyping analog circuits in software and reconfiguring an analog circuit design over USB. This allows for quick prototyping of various designs without having to physically wire each design on a breadboard or PCB by hand. I'm using an AN221E04 (quite an old board released in 2004) which internally has analog components (such as amplifiers, capacitors, summers, integrators, and so on) that can be wired and parameterized in software. It has configurable analog blocks (CABs) connected through a programmable routing network. Many functions are implemented using switched-capacitor techniques. A switched-capacitor circuit uses a capacitor and periodically controlled switches to move charge in discrete steps, which makes it behave like a programmable resistor or other analog element.
+An FPAA is the analog version of its cousin the FPGA, the field programmable gate array, which is aimed at digital design. An FPAA allows for prototyping analog circuits in software and reconfiguring an analog circuit design over USB. This allows for quick prototyping of various designs without having to physically wire each design on a breadboard or perfboard by hand. I'm using an AN221E04 (quite an old board released in 2004) which internally has analog components (such as amplifiers, capacitors, summers, integrators, and so on) that can be wired and parameterized in software. It has configurable analog blocks (CABs) connected through a programmable routing network. Many functions are implemented using switched-capacitor techniques. A switched-capacitor circuit uses a capacitor and periodically controlled switches to move charge in discrete steps, which makes it behave like a programmable resistor or other analog element.
 
 What is thermodynamic computing? It is a form of computing that uses noise as a computational resource. This processing unit is based on the design of Normal Computing's SPU (their first prototype before their more recent processor CN101). My goal here is to implement the same SDEs and ODEs. However, the mapping to hardware is very different between the SPU and the FPAA. The SPU constructs the ODE physically through a network of capacitors and resistors, while the FPAA uses switched-capacitor components to mimic op-amp circuit design. The SPU handles both underdamped and overdamped cases of the Langevin dynamics, while the build here implements the overdamped case only. The FPAA doesn't have a native noise source on chip, so I create a pseudorandom Gaussian noise source that is streamed via a DAQ (data acquisition) device. This DAQ can both output analog signals and receive inputs from the FPAA chip so I can analyze the results.
 
@@ -161,16 +161,11 @@ $$\begin{aligned} \dot z &= a - z^2, \\ \dot x &= c - z\,x, \end{aligned}$$
 
 whose fixed point is $z^* = \sqrt{a}$ and $x^* = c/\sqrt{a}$. The two stages evolve simultaneously, not one after the other.
 
-You can see that in how they settle. I'd assumed the second stage would lag, since the linearized eigenvalues are $-2z^*$ and $-z^*$, so there is a slower mode available. It never shows up. With both integrators starting from zero, substituting $x = (c/a)z$ satisfies the second equation exactly, so $x(t)$ is a rescaled copy of $z(t)$ for all time: same shape, same rate, different amplitude. Not a second stage trailing the first.
-
-Over 12 values of $a$, the square root stage alone was off by 1.2% rms and the composed output by 1.3%.
-
 <figure>
 <img src="/assets/images/fpaa-op-invsqrt.png" alt="Measured settled voltage against the input, following an inverse square root curve" style="max-width: 460px;" />
 <figcaption>The same axes again, one stage further on. Twelve inputs, both circuits running together.</figcaption>
 </figure>
 
-I'd expected the errors to add. They don't, and the reason is that the stages aren't independent. Since $x^* = c/z^*$, a first stage that settles low pushes the second stage high by the same fraction, so part of the error the second stage inherits cancels against the error it makes itself.
 
 # Conclusion
 
